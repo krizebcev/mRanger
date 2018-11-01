@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         gumbPoveziBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent kontroleActivity = new Intent(getApplicationContext(), KontroleActivity.class);
-                startActivity(kontroleActivity);
+                //Intent kontroleActivity = new Intent(getApplicationContext(), KontroleActivity.class);
+                //startActivity(kontroleActivity);
             }
         }); //kraj gumbPoveziBluetooth
 
