@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public DeviceListAdapter myDeviceListAdapter;
 
+    private String deviceAddress;
+    public static String EXTRA_ADDRESS = "device_address";
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -116,6 +119,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        myBluetoothAdapter.cancelDiscovery();
 
+        deviceAddress = myBluetoothDevices.get(position).getAddress();
+        myBluetoothDevices.get(position).createBond();
+
+        Intent connection = new Intent(MainActivity.this, KontroleActivity.class);
+        connection.putExtra(EXTRA_ADDRESS, deviceAddress);
+        startActivity(connection);
     }
 }
