@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,10 +28,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private BluetoothAdapter myBluetoothAdapter;
     private ArrayList<BluetoothDevice> myBluetoothDevices;
 
+    public DeviceListAdapter myDeviceListAdapter;
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(myBroadcastReceiver);
     }
 
     @Override
@@ -69,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         gumbDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                myBluetoothDevices.clear(); //ukoliko smo već otkrili neke, čistimo
+
                 if (myBluetoothAdapter.isDiscovering()) {
 
                     myBluetoothAdapter.cancelDiscovery(); //poništi otkrivanje
@@ -86,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     myBluetoothAdapter.startDiscovery();
                 }
+                IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+                registerReceiver(myBroadcastReceiver, discoverDevicesIntent);
             }
         });
     }//kraj OnCreate
@@ -100,7 +108,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 myBluetoothDevices.add(device);
 
-                
+                myDeviceListAdapter = new DeviceListAdapter(context, R.layout.activity_discover, myBluetoothDevices);
+                listaDiscoveredDevices.setAdapter(myDeviceListAdapter);
             }
         }
     };
