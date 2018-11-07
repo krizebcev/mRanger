@@ -44,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gumbBTOnOff" />
 
     <ListView
+        android:id="@+id/listaDiscDevices"
         android:layout_width="350dp"
         android:layout_height="263dp"
         android:layout_marginStart="8dp"
