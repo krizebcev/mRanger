@@ -65,9 +65,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     startActivity(enableBTIntent);
                 }
                 if (myBluetoothAdapter.isEnabled()) { //Bluetooth uključen
-                    myBluetoothAdapter.disable();
-                    Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE); //isključi
-                    startActivity(enableBTIntent);
+                    myBluetoothAdapter.disable(); //isključi
+
+                    myBluetoothDevices.clear(); //ukoliko smo već otkrili neke, čistimo
+                    listaDiscoveredDevices.setAdapter(null);
+
+                    Toast.makeText(getApplicationContext(),"Bluetooth isključen.",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -97,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
                 registerReceiver(myBroadcastReceiver, discoverDevicesIntent);
+
+                if (!myBluetoothAdapter.isEnabled()) { //Bluetooth nije uključen
+                    Toast.makeText(getApplicationContext(),"Potrebno je uključiti Bluetooth!",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }//kraj OnCreate
