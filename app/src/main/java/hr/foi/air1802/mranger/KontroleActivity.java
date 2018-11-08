@@ -79,7 +79,7 @@ public class KontroleActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                inputStream =bluetoothSocket.getInputStream();
+                inputStream = bluetoothSocket.getInputStream();
                 byte[] buffer = new byte[1024];
                 int bytes;
                 while (true) {
