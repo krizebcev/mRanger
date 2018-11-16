@@ -7,12 +7,14 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -31,7 +33,6 @@ public class KontroleActivity extends AppCompatActivity {
     private boolean isBluetoothConnected = false;
 
     Button gumbDisconnect;
-
     Button gumbForward;
     Button gumbLeft;
     Button gumbRight;
@@ -39,9 +40,6 @@ public class KontroleActivity extends AppCompatActivity {
     Button gumbSporo;
     Button gumbNormalno;
     Button gumbBrzo;
-
-    InputStream inputStream = null;
-    String incomingMessage;
     StringBuilder messages;
 
     //za kretanje podaci
@@ -52,6 +50,12 @@ public class KontroleActivity extends AppCompatActivity {
     private int DesniMotor = 180;
     private int LijeviMotor = 180;
 
+    //dretva
+    TextView textDretva;
+    TextView textDolazni;
+    InputStream inputStream = null;
+    Handler timerHandler = new Handler();
+    long startTime = 0;
 
     @Override
     public void onBackPressed() {
@@ -78,6 +82,11 @@ public class KontroleActivity extends AppCompatActivity {
         gumbSporo = findViewById(R.id.gumbSporo);
         gumbNormalno = findViewById(R.id.gumbNormalno);
         gumbBrzo = findViewById(R.id.gumbBrzo);
+
+        //dretva
+        textDretva=findViewById(R.id.textDretva);
+        textDolazni=findViewById(R.id.textDolazni);
+
 
         //boje gumbova brzina
         gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
@@ -166,6 +175,16 @@ public class KontroleActivity extends AppCompatActivity {
                 gumbSporo.setBackgroundColor(Color.parseColor("#4eae68"));
                 gumbNormalno.setBackgroundResource(android.R.drawable.btn_default);
                 gumbBrzo.setBackgroundResource(android.R.drawable.btn_default);
+
+                //dretva
+                try{
+                    inputStream=bluetoothSocket.getInputStream();
+                }catch (IOException e)
+                {
+
+                }
+                startTime =  System.currentTimeMillis();
+                timerHandler.postDelayed(timerRunnable, 0);
             }
         });
 
@@ -188,10 +207,47 @@ public class KontroleActivity extends AppCompatActivity {
                 gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
                 gumbNormalno.setBackgroundResource(android.R.drawable.btn_default);
                 gumbBrzo.setBackgroundColor(Color.parseColor("#e23232"));
-            }
-        }); 
 
+
+                //dretva
+                timerHandler.removeCallbacks(timerRunnable);
+            }
+        });
     }
+
+
+    //dretva
+    Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds =  (int) (millis / 1000);
+            int decis = (int) ((millis % 1000)/10);
+
+            textDretva.setText(String.format("Time: %d.%02d", seconds, decis));
+
+            try {
+                int byteCount = inputStream.available();
+                if(byteCount > 0)
+                {
+                    byte[] rawBytes = new byte[byteCount];
+                    inputStream.read(rawBytes);
+                    String test ="";
+                    for (int i=0; i<rawBytes.length;i++){
+                        test+=rawBytes[i];
+                    }
+                    final String string=new String(rawBytes,"UTF-8");
+                    textDolazni.setText(test);
+                }
+
+            }catch (IOException e)
+            {
+
+            }
+
+            timerHandler.postDelayed(this, 10);
+        }
+    };
 
 
     //metoda za kretanje
