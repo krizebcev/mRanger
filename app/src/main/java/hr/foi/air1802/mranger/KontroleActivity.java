@@ -10,12 +10,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.UUID;
 
 public class KontroleActivity extends AppCompatActivity {
@@ -29,11 +31,16 @@ public class KontroleActivity extends AppCompatActivity {
     private boolean isBluetoothConnected = false;
 
     Button gumbDisconnect;
+    Button gumbIdiNaprijed;
 
 
     InputStream inputStream = null;
     String incomingMessage;
     StringBuilder messages;
+
+    byte[] cmd = new byte[13];
+    public static final int WRITEMODULE = 2;
+    public int type;
 
     @Override
     public void onBackPressed() {
@@ -49,6 +56,7 @@ public class KontroleActivity extends AppCompatActivity {
         messages = new StringBuilder();
         address = newint.getStringExtra(MainActivity.EXTRA_ADDRESS);
         gumbDisconnect = findViewById(R.id.gumbDisconnect);
+        gumbIdiNaprijed = findViewById(R.id.gumbIdiNaprijed);
 
         new ConnectBT().execute();
 
@@ -57,6 +65,76 @@ public class KontroleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Disconnect();
             }
+        });
+
+
+        gumbIdiNaprijed.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Toast.makeText(getApplicationContext(),"Stisnuto",Toast.LENGTH_SHORT).show();
+
+                    cmd[0]=(byte) 0xff;
+                    cmd[1]=(byte) 0x55;
+                    cmd[2]=(byte) 8;
+                    cmd[3]=(byte) 0;
+                    cmd[4]=(byte) WRITEMODULE;
+                    cmd[5]=(byte) 5;
+                    final ByteBuffer buf = ByteBuffer.allocate(4);
+                    buf.putShort((short)-180);
+                    buf.putShort((short)180);
+                    buf.position(0);
+                    // Read back bytes
+                    final byte b1 = buf.get();
+                    final byte b2 = buf.get();
+                    final byte b3 = buf.get();
+                    final byte b4 = buf.get();
+                    cmd[6] = b2;
+                    cmd[7] = b1;
+                    cmd[8] = b4;
+                    cmd[9] = b3;
+                    cmd[10]=(byte) '\n';
+
+                    try{
+                        bluetoothSocket.getOutputStream().write(cmd);
+                    }catch(IOException e){
+
+                    }
+
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Toast.makeText(getApplicationContext(),"Pusteno",Toast.LENGTH_SHORT).show();
+                    cmd[0]=(byte) 0xff;
+                    cmd[1]=(byte) 0x55;
+                    cmd[2]=(byte) 8;
+                    cmd[3]=(byte) 0;
+                    cmd[4]=(byte) WRITEMODULE;
+                    cmd[5]=(byte) 5;
+                    final ByteBuffer buf = ByteBuffer.allocate(4);
+                    buf.putShort((short)0);
+                    buf.putShort((short)0);
+                    buf.position(0);
+                    // Read back bytes
+                    final byte b1 = buf.get();
+                    final byte b2 = buf.get();
+                    final byte b3 = buf.get();
+                    final byte b4 = buf.get();
+                    cmd[6] = b2;
+                    cmd[7] = b1;
+                    cmd[8] = b4;
+                    cmd[9] = b3;
+                    cmd[10]=(byte) '\n';
+
+                    try{
+                        bluetoothSocket.getOutputStream().write(cmd);
+                    }catch(IOException e){
+
+                    }
+                }
+                return true;
+            }
+
+
         });
     }
 
