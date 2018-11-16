@@ -38,9 +38,10 @@ public class KontroleActivity extends AppCompatActivity {
     String incomingMessage;
     StringBuilder messages;
 
+    //za kretanje podaci
     byte[] cmd = new byte[13];
     public static final int WRITEMODULE = 2;
-    public int type;
+    public static final int type=5;
 
     @Override
     public void onBackPressed() {
@@ -67,7 +68,6 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
-
         gumbIdiNaprijed.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -75,67 +75,49 @@ public class KontroleActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     Toast.makeText(getApplicationContext(),"Stisnuto",Toast.LENGTH_SHORT).show();
 
-                    cmd[0]=(byte) 0xff;
-                    cmd[1]=(byte) 0x55;
-                    cmd[2]=(byte) 8;
-                    cmd[3]=(byte) 0;
-                    cmd[4]=(byte) WRITEMODULE;
-                    cmd[5]=(byte) 5;
-                    final ByteBuffer buf = ByteBuffer.allocate(4);
-                    buf.putShort((short)-180);
-                    buf.putShort((short)180);
-                    buf.position(0);
-                    // Read back bytes
-                    final byte b1 = buf.get();
-                    final byte b2 = buf.get();
-                    final byte b3 = buf.get();
-                    final byte b4 = buf.get();
-                    cmd[6] = b2;
-                    cmd[7] = b1;
-                    cmd[8] = b4;
-                    cmd[9] = b3;
-                    cmd[10]=(byte) '\n';
-
-                    try{
-                        bluetoothSocket.getOutputStream().write(cmd);
-                    }catch(IOException e){
-
-                    }
+                    Kretanje(-180,180);
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     Toast.makeText(getApplicationContext(),"Pusteno",Toast.LENGTH_SHORT).show();
-                    cmd[0]=(byte) 0xff;
-                    cmd[1]=(byte) 0x55;
-                    cmd[2]=(byte) 8;
-                    cmd[3]=(byte) 0;
-                    cmd[4]=(byte) WRITEMODULE;
-                    cmd[5]=(byte) 5;
-                    final ByteBuffer buf = ByteBuffer.allocate(4);
-                    buf.putShort((short)0);
-                    buf.putShort((short)0);
-                    buf.position(0);
-                    // Read back bytes
-                    final byte b1 = buf.get();
-                    final byte b2 = buf.get();
-                    final byte b3 = buf.get();
-                    final byte b4 = buf.get();
-                    cmd[6] = b2;
-                    cmd[7] = b1;
-                    cmd[8] = b4;
-                    cmd[9] = b3;
-                    cmd[10]=(byte) '\n';
 
-                    try{
-                        bluetoothSocket.getOutputStream().write(cmd);
-                    }catch(IOException e){
+                    Kretanje(0,0);
 
-                    }
                 }
                 return true;
             }
 
 
         });
+    }
+
+    private void Kretanje(int lijeviMotor,int desniMotor)
+    {
+        cmd[0]=(byte) 0xff;
+        cmd[1]=(byte) 0x55;
+        cmd[2]=(byte) 8;
+        cmd[3]=(byte) 0;
+        cmd[4]=(byte) WRITEMODULE;
+        cmd[5]=(byte) type;
+        final ByteBuffer buf = ByteBuffer.allocate(4);
+        buf.putShort((short) lijeviMotor);
+        buf.putShort((short) desniMotor);
+        buf.position(0);
+        // Read back bytes
+        final byte b1 = buf.get();
+        final byte b2 = buf.get();
+        final byte b3 = buf.get();
+        final byte b4 = buf.get();
+        cmd[6] = b2;
+        cmd[7] = b1;
+        cmd[8] = b4;
+        cmd[9] = b3;
+        cmd[10]=(byte) '\n';
+
+        try{
+            bluetoothSocket.getOutputStream().write(cmd);
+        }catch(IOException e){
+
+        }
     }
 
     //metoda za odspajanje
