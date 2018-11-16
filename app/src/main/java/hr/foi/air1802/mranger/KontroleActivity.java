@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -77,6 +78,11 @@ public class KontroleActivity extends AppCompatActivity {
         gumbSporo = findViewById(R.id.gumbSporo);
         gumbNormalno = findViewById(R.id.gumbNormalno);
         gumbBrzo = findViewById(R.id.gumbBrzo);
+
+        //boje gumbova brzina
+        gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
+        gumbNormalno.setBackgroundColor(Color.parseColor("#fed63c"));
+        gumbBrzo.setBackgroundResource(android.R.drawable.btn_default);
 
         new ConnectBT().execute();
 
@@ -156,6 +162,10 @@ public class KontroleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PromjenaBrzine(120, 120);
+
+                gumbSporo.setBackgroundColor(Color.parseColor("#4eae68"));
+                gumbNormalno.setBackgroundResource(android.R.drawable.btn_default);
+                gumbBrzo.setBackgroundResource(android.R.drawable.btn_default);
             }
         });
 
@@ -163,6 +173,10 @@ public class KontroleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PromjenaBrzine(180,180);
+
+                gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
+                gumbNormalno.setBackgroundColor(Color.parseColor("#fed63c"));
+                gumbBrzo.setBackgroundResource(android.R.drawable.btn_default);
             }
         });
 
@@ -170,6 +184,10 @@ public class KontroleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PromjenaBrzine(240,240);
+
+                gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
+                gumbNormalno.setBackgroundResource(android.R.drawable.btn_default);
+                gumbBrzo.setBackgroundColor(Color.parseColor("#e23232"));
             }
         }); 
 
