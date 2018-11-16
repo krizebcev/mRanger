@@ -31,7 +31,11 @@ public class KontroleActivity extends AppCompatActivity {
     private boolean isBluetoothConnected = false;
 
     Button gumbDisconnect;
-    Button gumbIdiNaprijed;
+
+    Button gumbForward;
+    Button gumbLeft;
+    Button gumbRight;
+    Button gumbBackwards;
 
 
     InputStream inputStream = null;
@@ -57,7 +61,11 @@ public class KontroleActivity extends AppCompatActivity {
         messages = new StringBuilder();
         address = newint.getStringExtra(MainActivity.EXTRA_ADDRESS);
         gumbDisconnect = findViewById(R.id.gumbDisconnect);
-        gumbIdiNaprijed = findViewById(R.id.gumbIdiNaprijed);
+
+        gumbForward = findViewById(R.id.gumbForward);
+        gumbLeft = findViewById(R.id.gumbLeft);
+        gumbRight = findViewById(R.id.gumbRight);
+        gumbBackwards = findViewById(R.id.gumbBackwards);
 
         new ConnectBT().execute();
 
@@ -68,25 +76,69 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
-        gumbIdiNaprijed.setOnTouchListener(new View.OnTouchListener() {
+        gumbForward.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Toast.makeText(getApplicationContext(),"Stisnuto",Toast.LENGTH_SHORT).show();
 
                     Kretanje(-180,180);
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    Toast.makeText(getApplicationContext(),"Pusteno",Toast.LENGTH_SHORT).show();
 
                     Kretanje(0,0);
-
                 }
                 return true;
             }
 
 
+        });
+
+        gumbLeft.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Kretanje(-180,-180);
+
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Kretanje(0,0);
+                }
+                return true;
+            }
+        });
+
+        gumbRight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Kretanje(180,180);
+
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Kretanje(0,0);
+                }
+                return true;
+            }
+        });
+
+        gumbBackwards.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                    Kretanje(180,-180);
+
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                    Kretanje(0,0);
+                }
+                return true;
+            }
         });
     }
 
