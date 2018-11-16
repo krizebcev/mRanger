@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +35,9 @@ public class KontroleActivity extends AppCompatActivity {
     Button gumbLeft;
     Button gumbRight;
     Button gumbBackwards;
-
+    Button gumbSporo;
+    Button gumbNormalno;
+    Button gumbBrzo;
 
     InputStream inputStream = null;
     String incomingMessage;
@@ -45,7 +46,11 @@ public class KontroleActivity extends AppCompatActivity {
     //za kretanje podaci
     byte[] cmd = new byte[13];
     public static final int WRITEMODULE = 2;
-    public static final int type=5;
+    public static final int type = 5;
+
+    private int DesniMotor = 180;
+    private int LijeviMotor = 180;
+
 
     @Override
     public void onBackPressed() {
@@ -62,10 +67,16 @@ public class KontroleActivity extends AppCompatActivity {
         address = newint.getStringExtra(MainActivity.EXTRA_ADDRESS);
         gumbDisconnect = findViewById(R.id.gumbDisconnect);
 
+        //kretanje
         gumbForward = findViewById(R.id.gumbForward);
         gumbLeft = findViewById(R.id.gumbLeft);
         gumbRight = findViewById(R.id.gumbRight);
         gumbBackwards = findViewById(R.id.gumbBackwards);
+
+        //brzine
+        gumbSporo = findViewById(R.id.gumbSporo);
+        gumbNormalno = findViewById(R.id.gumbNormalno);
+        gumbBrzo = findViewById(R.id.gumbBrzo);
 
         new ConnectBT().execute();
 
@@ -82,7 +93,7 @@ public class KontroleActivity extends AppCompatActivity {
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                    Kretanje(-180,180);
+                    Kretanje(-LijeviMotor,DesniMotor);
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -100,7 +111,7 @@ public class KontroleActivity extends AppCompatActivity {
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                    Kretanje(-180,-180);
+                    Kretanje(-LijeviMotor,-DesniMotor);
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -116,7 +127,7 @@ public class KontroleActivity extends AppCompatActivity {
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                    Kretanje(180,180);
+                    Kretanje(LijeviMotor,DesniMotor);
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -131,7 +142,7 @@ public class KontroleActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                    Kretanje(180,-180);
+                    Kretanje(LijeviMotor,-DesniMotor);
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -140,8 +151,32 @@ public class KontroleActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        gumbSporo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PromjenaBrzine(120, 120);
+            }
+        });
+
+        gumbNormalno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PromjenaBrzine(180,180);
+            }
+        });
+
+        gumbBrzo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PromjenaBrzine(240,240);
+            }
+        }); 
+
     }
 
+
+    //metoda za kretanje
     private void Kretanje(int lijeviMotor,int desniMotor)
     {
         cmd[0]=(byte) 0xff;
@@ -172,6 +207,12 @@ public class KontroleActivity extends AppCompatActivity {
         }
     }
 
+    //metoda za promjenu brzine kretanja
+    private void PromjenaBrzine(int desniMotor, int lijeviMotor){
+        DesniMotor = desniMotor;
+        LijeviMotor = lijeviMotor;
+    }
+
     //metoda za odspajanje
     private void Disconnect(){
         if (bluetoothSocket!=null) //ako smo spojeni
@@ -188,30 +229,7 @@ public class KontroleActivity extends AppCompatActivity {
 
     //OVO NAS ZANIMA -> VIDLI NA INTERNETU (KINEZ NA git/makeblock-official.cc)
     Thread ListenInput=new Thread(){
-        @Override
-        public void run() {
-            try {
-                inputStream = bluetoothSocket.getInputStream();
-                byte[] buffer = new byte[1024];
-                int bytes;
-                while (true) {
-                    // Read from the InputStream
-                    try {
-                        if(inputStream ==null)
-                        {
-                            Log.d("","InputStream is null");
-                        }
-                        bytes = inputStream.read(buffer);
-                        incomingMessage = new String(buffer, 0, bytes);
-                        messages.append(incomingMessage);
-                    } catch (IOException e) {
-                        Log.d("","Oh no, silent crash !");
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
     };
 
 
