@@ -251,29 +251,22 @@ public class KontroleActivity extends AppCompatActivity {
     }
 
     private String DohvatiTemperaturu() {
-        final int MODE_LINE = 0;
-        final int MODE_FORWARD = 1;
-        int commMode = MODE_LINE;
-
         String test = "";
 
         byte[] cmd = new byte[9];
         cmd[0] = (byte) 0xff; //0xff
         cmd[1] = (byte) 0x55; //0x55
         cmd[2] = (byte) 5; //5
-        cmd[3] = (byte) 7; //7
+        cmd[3] = (byte) 7; //7 indeks na kojem se nalazi senzor
         cmd[4] = (byte) 1; //1
-        cmd[5] = (byte) 27; //27
-        cmd[6] = (byte) (13 & 0xff); //13&0xff
-        cmd[7] = (byte) (2 & 0xff); //2&0xff
+        cmd[5] = (byte) 27; //27 tip uređaja
+        cmd[6] = (byte) (13 & 0xff); //13&0xff- mora biti port 13 za senzor
+        cmd[7] = (byte) (2 & 0xff); //2&0xff- slot senzora čije uzimamo vrijednosti
         cmd[8] = (byte) '\n'; // '\n'
 
         try {
             bluetoothSocket.getOutputStream().write(cmd);
-        } catch (IOException e) {
-        }
 
-        try {
             int byteCount = bluetoothSocket.getInputStream().available();
 
             while (byteCount == 0) {
@@ -308,7 +301,7 @@ public class KontroleActivity extends AppCompatActivity {
         }
 
         String[] dijelovi = test.split(" ");
-        test = dijelovi[6]; //mislimo da je format 197 = 19.7
+        test = dijelovi[6]; //mislimo da je format 197 = 19.7, dohvaćamo sa 6 pozicije zato što je tu data
         int temp = Integer.parseInt(test, 16);
         float temperatura = (float) temp / 10;
         test = String.valueOf(temperatura) + " °C";
