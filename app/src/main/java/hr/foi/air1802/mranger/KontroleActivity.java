@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.renderscript.ScriptGroup;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,9 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class KontroleActivity extends AppCompatActivity {
@@ -251,45 +255,58 @@ public class KontroleActivity extends AppCompatActivity {
         String test ="";
 
         byte[] cmd = new byte[9];
-        cmd[0]=(byte) 0xff;
-        cmd[1]=(byte) 0x55;
-        cmd[2]=(byte) 5;
-        cmd[3]=(byte) 3;
-        cmd[4]=(byte) 1;
-        cmd[5]=(byte) 2;
-        cmd[6]=(byte) (6&0xff);
-        cmd[7]=(byte) (7&0xff);
-        cmd[8]=(byte) '\n';
+        cmd[0]=(byte) 0xff; //0xff
+        cmd[1]=(byte) 0x55; //0x55
+        cmd[2]=(byte) 5; //5
+        cmd[3]=(byte) 0; //3
+        cmd[4]=(byte) 1; //1
+        cmd[5]=(byte) 2; //2
+        cmd[6]=(byte) (13); //6&0xff
+        cmd[7]=(byte) (2); //7&0xff
+        cmd[8]=(byte) '\n'; // '\n'
 
         try{
             bluetoothSocket.getOutputStream().write(cmd);
-        }catch(IOException e){
-
-        }
-
-
+        }catch(IOException e){}
 
         try {
-
             int byteCount = bluetoothSocket.getInputStream().available();
 
             while(byteCount == 0){
                 byteCount = bluetoothSocket.getInputStream().available();
             }
 
-            if(byteCount > 0)
-            {
-                byte[] rawBytes = new byte[byteCount];
-                bluetoothSocket.getInputStream().read(rawBytes);
+            if(byteCount > 0) {
+                InputStream inputStream = bluetoothSocket.getInputStream();
+                byte[] podaci = new byte[1024];
+                int count = inputStream.read(podaci);
 
-                for (int i=0; i<rawBytes.length;i++){
-                    test+=rawBytes[i];
+                if (podaci != null) {
+
+                List<Byte> listaBajtova = new ArrayList<Byte>();
+
+                if(count > 0){
+                    for (int i=0;i<count;i++){
+                        Byte b = podaci[i];
+                        listaBajtova.add(b);
+                        Byte[] novaLista = listaBajtova.toArray(new Byte[listaBajtova.size()]);
+                        int[] buffer = new int[listaBajtova.size()];
+                        for (int j=0; j<novaLista.length;j++){
+                            test+=String.format("%02X ", novaLista[j]);
+                            buffer[j] = novaLista[j];
+                        }
+                        listaBajtova.clear();
+                    }
+                } }
                 }
-            }
         }catch (IOException e)
         {
         }
 
+        /*String[] dijelovi = test.split(" ");
+        test= dijelovi[8];
+        int temp = Integer.parseInt(test, 16);
+        test = ""+temp; */
         return test;
     }
 
