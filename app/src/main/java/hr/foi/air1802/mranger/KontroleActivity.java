@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -39,6 +40,9 @@ public class KontroleActivity extends AppCompatActivity {
     Button gumbSporo;
     Button gumbNormalno;
     Button gumbBrzo;
+
+    //temperatura
+    Button gumbTemperatura;
 
     InputStream inputStream = null;
     String incomingMessage;
@@ -83,6 +87,9 @@ public class KontroleActivity extends AppCompatActivity {
         gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
         gumbNormalno.setBackgroundColor(Color.parseColor("#fed63c"));
         gumbBrzo.setBackgroundResource(android.R.drawable.btn_default);
+
+        //temperatura
+        gumbTemperatura = findViewById(R.id.gumbTemperatura);
 
         new ConnectBT().execute();
 
@@ -189,7 +196,16 @@ public class KontroleActivity extends AppCompatActivity {
                 gumbNormalno.setBackgroundResource(android.R.drawable.btn_default);
                 gumbBrzo.setBackgroundColor(Color.parseColor("#e23232"));
             }
-        }); 
+        });
+
+        //temperatura
+
+        gumbTemperatura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               gumbTemperatura.setText(DohvatiTemperaturu());
+            }
+        });
 
     }
 
@@ -229,6 +245,52 @@ public class KontroleActivity extends AppCompatActivity {
     private void PromjenaBrzine(int desniMotor, int lijeviMotor){
         DesniMotor = desniMotor;
         LijeviMotor = lijeviMotor;
+    }
+
+    private String DohvatiTemperaturu(){
+        String test ="";
+
+        byte[] cmd = new byte[9];
+        cmd[0]=(byte) 0xff;
+        cmd[1]=(byte) 0x55;
+        cmd[2]=(byte) 5;
+        cmd[3]=(byte) 3;
+        cmd[4]=(byte) 1;
+        cmd[5]=(byte) 2;
+        cmd[6]=(byte) (6&0xff);
+        cmd[7]=(byte) (7&0xff);
+        cmd[8]=(byte) '\n';
+
+        try{
+            bluetoothSocket.getOutputStream().write(cmd);
+        }catch(IOException e){
+
+        }
+
+
+
+        try {
+
+            int byteCount = bluetoothSocket.getInputStream().available();
+
+            while(byteCount == 0){
+                byteCount = bluetoothSocket.getInputStream().available();
+            }
+
+            if(byteCount > 0)
+            {
+                byte[] rawBytes = new byte[byteCount];
+                bluetoothSocket.getInputStream().read(rawBytes);
+
+                for (int i=0; i<rawBytes.length;i++){
+                    test+=rawBytes[i];
+                }
+            }
+        }catch (IOException e)
+        {
+        }
+
+        return test;
     }
 
     //metoda za odspajanje
