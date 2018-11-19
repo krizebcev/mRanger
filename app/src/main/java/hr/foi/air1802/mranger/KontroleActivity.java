@@ -74,6 +74,7 @@ public class KontroleActivity extends AppCompatActivity {
         Intent newint = getIntent();
         messages = new StringBuilder();
         address = newint.getStringExtra(MainActivity.EXTRA_ADDRESS);
+        new ConnectBT().execute(); //konekcija
         gumbDisconnect = findViewById(R.id.gumbDisconnect);
 
         //kretanje
@@ -94,8 +95,6 @@ public class KontroleActivity extends AppCompatActivity {
 
         //temperatura
         gumbTemperatura = findViewById(R.id.gumbTemperatura);
-
-        new ConnectBT().execute();
 
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,16 +202,13 @@ public class KontroleActivity extends AppCompatActivity {
         });
 
         //temperatura
-
         gumbTemperatura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gumbTemperatura.setText(DohvatiTemperaturu());
             }
         });
-
     }
-
 
     //metoda za kretanje
     private void Kretanje(int lijeviMotor, int desniMotor) {
@@ -240,7 +236,6 @@ public class KontroleActivity extends AppCompatActivity {
         try {
             bluetoothSocket.getOutputStream().write(cmd);
         } catch (IOException e) {
-
         }
     }
 
@@ -265,16 +260,14 @@ public class KontroleActivity extends AppCompatActivity {
         cmd[8] = (byte) '\n'; // '\n'
 
         try {
-            bluetoothSocket.getOutputStream().write(cmd);
-
+            bluetoothSocket.getOutputStream().write(cmd);//uključivanje moda mjerenja temperature
             int byteCount = bluetoothSocket.getInputStream().available();
-
             while (byteCount == 0) {
                 byteCount = bluetoothSocket.getInputStream().available();
             }
 
             if (byteCount > 0) {
-                InputStream inputStream = bluetoothSocket.getInputStream();
+                InputStream inputStream = bluetoothSocket.getInputStream();//uzimanje podataka od robota
                 byte[] podaci = new byte[1024];
                 int count = inputStream.read(podaci);
 
@@ -297,8 +290,7 @@ public class KontroleActivity extends AppCompatActivity {
                     }
                 }
             }
-        } catch (IOException e) {
-        }
+        } catch (IOException e) {        }
 
         String[] dijelovi = test.split(" ");
         test = dijelovi[6]; //mislimo da je format 197 = 19.7, dohvaćamo sa 6 pozicije zato što je tu data
@@ -314,8 +306,7 @@ public class KontroleActivity extends AppCompatActivity {
         {
             try {
                 bluetoothSocket.close(); //prekini vezu
-            } catch (IOException e) {
-            }
+            } catch (IOException e) {}
         }
         finish();
     }
