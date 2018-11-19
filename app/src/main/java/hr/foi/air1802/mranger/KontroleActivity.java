@@ -245,7 +245,7 @@ public class KontroleActivity extends AppCompatActivity {
         finish();
     }
 
-    //OVO NAS ZANIMA -> VIDLI NA INTERNETU (KINEZ NA git/makeblock-official.cc)
+    //OVO NAS ZANIMA -> VIDLI NA INTERNETU (KINEZ NA git/makeblock-official.cc) test temp
     Thread ListenInput=new Thread(){
 
     };
