@@ -10,12 +10,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Klasa DeviceListAdapter služi za prikupljanje svih pronađenih bluetooth uređaja te prikaz istih u Listi.
+ * Lista se prikazuje na početnom zaslonu, a puni se na pritisak tipke OTKRIJ UREĐAJE.
+ */
 public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
 
     private ArrayList<BluetoothDevice> myDevices;
     private LayoutInflater myLayoutInflater;
     private int myResourceId;
 
+    /**
+     * Konstruktor za klasu DeviceListAdapter
+     * @param context - parametar u koji prosljeđujemo trenutni kontekst
+     * @param resource - parametar u koji prosljeđujemo listu u kojoj se prikazuju uređaji
+     * @param devices - parametar u koji se prosljeđuje lista pronađenih uređaja. Oni koji se prikazuju za odabir na zaslonu
+     */
     public DeviceListAdapter(Context context, int resource, ArrayList<BluetoothDevice> devices) {
         super(context, resource, devices);
 
@@ -24,6 +34,13 @@ public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
         myResourceId = resource;
     }
 
+    /**
+     * Metoda koja prikazuje pronađene Bluetooth uređaje u listi, odnosno postavlja ih u listu.
+     * @param position - pareametar koji iznačava poziciju uređaja u listi, tj. njegov index.
+     * @param convertView - View u kojem se prikazuju pronađeni uređaji.
+     * @param parent - grupa u kojoj se nalazi naš View.
+     * @return
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
 
         convertView = myLayoutInflater.inflate(myResourceId, null);
