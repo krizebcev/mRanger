@@ -3,7 +3,16 @@ package hr.foi.air1802.mranger;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.view.MotionEvent;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +28,9 @@ public final class Controls {
     public static BluetoothAdapter myBluetoothAdapter = null;
     public static BluetoothSocket bluetoothSocket = null;
     public static boolean isBluetoothConnected = false;
+    private static float globTemp;
+    private static boolean isTemperatureRead=false;
+    private static float proslaTemp;
 
     //podaci za kretanje
     private static byte[] cmd = new byte[13];
@@ -26,6 +38,7 @@ public final class Controls {
     public static final int type = 5;
     private static int DesniMotor = 180;
     private static int LijeviMotor = 180;
+
 
     private static void move(int lijeviMotor, int desniMotor) {
         cmd[0] = (byte) 0xff;
@@ -159,6 +172,8 @@ public final class Controls {
         test = dijelovi[6]; // dohvaćamo sa 6. indeksa buffera
         int temp = Integer.parseInt(test, 16);
         float temperatura = (float) temp / 10;
+        globTemp=temperatura;
+        isTemperatureRead=true;
         test = String.valueOf(temperatura) + " °C";
         return test;
     }
@@ -172,6 +187,33 @@ public final class Controls {
         }
         activity.finish();
     }
+
+    public static void insertTemperatueToDB(Context context){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="https://barka.foi.hr/WebDiP/2017/zadaca_05/jkristovi/lp/unos.php?temp="+globTemp;
+
+        if (isTemperatureRead) {
+            if (proslaTemp == globTemp){
+                Toast.makeText(context, "Temperatura se nije promijenila.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                proslaTemp = globTemp;
+                // Request a string response from the provided URL.
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,null,null);
+
+                // Add the request to the RequestQueue.
+                queue.add(stringRequest);
+                Toast.makeText(context, "Temperatura upisana u bazu..", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Toast.makeText(context, "Prvo je potrebno očitati temperaturu.", Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+
 
 
 }

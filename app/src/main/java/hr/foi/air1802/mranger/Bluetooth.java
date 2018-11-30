@@ -31,7 +31,7 @@ public final class Bluetooth {
     public static void enableDisableBluetooth(Context context){
 
         if (myBluetoothAdapter == null) { //ne podržava hr.foi.air1802.mranger.Bluetooth
-            Toast.makeText(context,"This device does not support hr.foi.air1802.mranger.Bluetooth connection.",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Ovaj uređaj ne podržava Bluetooth konekciju.",Toast.LENGTH_LONG).show();
         }
         if (!myBluetoothAdapter.isEnabled()) { //hr.foi.air1802.mranger.Bluetooth nije uključen
             Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE); //uključi
@@ -43,7 +43,7 @@ public final class Bluetooth {
             myBluetoothDevices.clear(); //ukoliko smo već otkrili neke, čistimo
             listaDiscoveredDevices.setAdapter(null);
 
-            Toast.makeText(context,"hr.foi.air1802.mranger.Bluetooth isključen.",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Bluetooth isključen.",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -72,7 +72,7 @@ public final class Bluetooth {
         context.registerReceiver(myBroadcastReceiver, discoverDevicesIntent);
 
         if (!myBluetoothAdapter.isEnabled()) { //hr.foi.air1802.mranger.Bluetooth nije uključen
-            Toast.makeText(context,"Potrebno je uključiti hr.foi.air1802.mranger.Bluetooth!",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Potrebno je uključiti Bluetooth!",Toast.LENGTH_LONG).show();
         }
     }
 

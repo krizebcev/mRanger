@@ -8,8 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.InputStream;
-
 public class KontroleActivity extends AppCompatActivity {
 
     Button gumbDisconnect;
@@ -23,7 +21,7 @@ public class KontroleActivity extends AppCompatActivity {
 
     //temperatura
     Button gumbTemperatura;
-
+    Button gumbPohraniTemperaturu;
 
     StringBuilder messages;
 
@@ -61,6 +59,7 @@ public class KontroleActivity extends AppCompatActivity {
 
         //temperatura
         gumbTemperatura = findViewById(R.id.gumbTemperatura);
+        gumbPohraniTemperaturu=findViewById(R.id.gumbPohraniTemperaturu);
 
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +136,13 @@ public class KontroleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gumbTemperatura.setText(Controls.getTemperature());
+            }
+        });
+
+        gumbPohraniTemperaturu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Controls.insertTemperatueToDB(getApplicationContext());
             }
         });
     }
