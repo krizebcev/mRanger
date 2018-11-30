@@ -22,6 +22,12 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
+/* /
+ * Dosadašnja funkcionalnost za ultrasonic senzora je obustavljena.
+ * Naime nije moguće u isto vrijeme voziti robot i skenirati područje ispred sebe budući da
+ * kod na samom robotu ne dopušta takvu funkcionalnost. U nekom trenutku je moguće ili samo voziti robota ili mjeriti udaljenost s senzorom.
+  * */
+
 public class KontroleActivity extends AppCompatActivity {
 
     String address = null;
