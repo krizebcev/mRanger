@@ -25,6 +25,9 @@ public class KontroleActivity extends AppCompatActivity {
 
     StringBuilder messages;
 
+    /**
+     * Metoda koja čeka pritisak na gumb za povratak na prethodni zaslon.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -61,6 +64,9 @@ public class KontroleActivity extends AppCompatActivity {
         gumbTemperatura = findViewById(R.id.gumbTemperatura);
         gumbPohraniTemperaturu=findViewById(R.id.gumbPohraniTemperaturu);
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za prekidanje bluetooth veze.
+         */
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +74,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         *  Metoda koja se aktivira na pritisak gumba za kretanje unaprijed.
+         */
         gumbForward.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -77,6 +86,9 @@ public class KontroleActivity extends AppCompatActivity {
 
         });
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za kretanje ulijevo.
+         */
         gumbLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -84,6 +96,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za kretanje udesno.
+         */
         gumbRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -91,6 +106,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za kretanje unazad.
+         */
         gumbBackwards.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -98,6 +116,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za promijenu brzine robota na sporo.
+         */
         gumbSporo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +130,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za promijenu brzine robota na normalno.
+         */
         gumbNormalno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +144,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za promijenu brzine robota na brzo.
+         */
         gumbBrzo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +158,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
-        //temperatura
+        /**
+         * Metoda koja se aktivira na pritisak gumba za očitanje temperature.
+         */
         gumbTemperatura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +168,9 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Metoda koja se aktivira na pritisak gumba za pohranjivanje temperature u bazu.
+         */
         gumbPohraniTemperaturu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
