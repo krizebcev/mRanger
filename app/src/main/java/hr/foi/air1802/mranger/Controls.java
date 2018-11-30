@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -21,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Klasa koja služi za upravljanje kontrolama na robotu
+ */
 public final class Controls {
 
     public static String address = null;
@@ -39,7 +40,11 @@ public final class Controls {
     private static int DesniMotor = 180;
     private static int LijeviMotor = 180;
 
-
+    /**
+     * Metoda u kojoj se šalju podaci za kretanje robota
+     * @param lijeviMotor brzina lijevog motora
+     * @param desniMotor brzina desnog motora
+     */
     private static void move(int lijeviMotor, int desniMotor) {
         cmd[0] = (byte) 0xff;
         cmd[1] = (byte) 0x55;
@@ -68,6 +73,11 @@ public final class Controls {
         }
     }
 
+    /**
+     * Metoda koja služi za kretanje robota prema ravno
+     * @param event objekt u kojem se prosljeđuje događaj
+     * @return
+     */
     public static boolean moveForward(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
@@ -80,6 +90,11 @@ public final class Controls {
         return true;
     }
 
+    /**
+     * Metoda koja služi za skretanje robota ulijevo
+     * @param event objekt u kojem se prosljeđuje događaj
+     * @return
+     */
     public static boolean moveLeft(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
@@ -92,6 +107,11 @@ public final class Controls {
         return true;
     }
 
+    /**
+     * Metoda koja služi za skretanje robota udesno
+     * @param event objekt u kojem se prosljeđuje događaj
+     * @return
+     */
     public static boolean moveRight(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
@@ -104,6 +124,11 @@ public final class Controls {
         return true;
     }
 
+    /**
+     * Metoda koja služi za kretanje robota unatrag
+     * @param event objekt u kojem se prosljeđuje događaj
+     * @return
+     */
     public  static  boolean moveBackwards(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
@@ -116,11 +141,20 @@ public final class Controls {
         return true;
     }
 
+    /**
+     * Metoda koja služi za promjenu brzine kretanja robota
+     * @param desniMotor brzina desnog motora
+     * @param lijeviMotor brzina lijevog motora
+     */
     public static void changeSpeed(int desniMotor, int lijeviMotor) {
         DesniMotor = desniMotor;
         LijeviMotor = lijeviMotor;
     }
 
+    /**
+     * Metoda koja služi za dohvaćanje temperature s robota
+     * @return
+     */
     public static String getTemperature() {
         String test = "";
 
@@ -178,6 +212,10 @@ public final class Controls {
         return test;
     }
 
+    /**
+     * Metoda koja služi za prekid Bluetooth veze s robotom
+     * @param activity aktivnost koja se završava ovom metodom
+     */
     public static void Disconnect(Activity activity) {
         if (bluetoothSocket != null) //ako smo spojeni
         {
@@ -188,6 +226,10 @@ public final class Controls {
         activity.finish();
     }
 
+    /**
+     * Metoda koja služi za slanje temperature u bazu podataka
+     * @param context objekt u kojem se prosljeđuje trenutni kontekst
+     */
     public static void insertTemperatueToDB(Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="https://barka.foi.hr/WebDiP/2017/zadaca_05/jkristovi/lp/unos.php?temp="+globTemp;
@@ -212,8 +254,4 @@ public final class Controls {
         }
 
     }
-
-
-
-
 }
