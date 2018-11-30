@@ -16,6 +16,11 @@ public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
     Context context;
     Activity activity;
 
+    /**
+     * Konsturktor metode
+     * @param context - kontekst klase KontroleActivity.java
+     * @param activity - aktivnost klase KontroleActivity.java
+     */
     public ConnectBT(Context context, Activity activity){
         this.context=context;
         this.activity=activity;
@@ -23,11 +28,19 @@ public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
 
     private boolean ConnectSuccess = true; //ako smo došli do ovdje, skoro smo se spojili
 
+    /**
+     * Metoda koja ispisuje "Povezivanje...." dok se ne ostvari bluetooth veza između uređaja.
+     */
     @Override
     protected void onPreExecute() {
-        Toast.makeText(context, "Povezivanje....", Toast.LENGTH_LONG).show(); //dok traje spajanje
+        Toast.makeText(context, "Povezivanje....", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Stvaranje bluetooth veze između uređaja.
+     * @param devices - parameetar kojim se prosljeđuje uređaj
+     * @return - metoda uvijek vraća null
+     */
     @Override
     protected Void doInBackground(Void... devices) //varijabilan broj parametara, dobro je to tako
     {
@@ -53,6 +66,10 @@ public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
         return null;
     }
 
+    /**
+     * Status bluetooth veze. Ukoliko je veza ostvarena, ispisuje se "Povezivanje uspješno " inaće "Povezivanje neuspješno".
+     * @param result
+     */
     @Override
     protected void onPostExecute(Void result) //nakon pokušaja spajanja, provjeravamo da li je sve u redu
     {
