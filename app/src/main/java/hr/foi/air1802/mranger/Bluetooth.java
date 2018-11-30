@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Klasa koja služi za uključivanje/isključivanje Bluetootha, otkirvanje uređaja i stvaranje konekcije
+ */
 public final class Bluetooth {
     public static BluetoothAdapter myBluetoothAdapter;
     public static ArrayList<BluetoothDevice> myBluetoothDevices;
@@ -30,7 +33,10 @@ public final class Bluetooth {
     }
 
 
-
+    /**
+     * Metoda koja služi za uključivanje/isključivanje Bluetootha
+     * @param context - parametar u kojem prosljeđujemo trenutni kontekst
+     */
     public static void enableDisableBluetooth(Context context){
 
         if (myBluetoothAdapter == null) { //ne podržava hr.foi.air1802.mranger.Bluetooth
@@ -50,6 +56,12 @@ public final class Bluetooth {
         }
     }
 
+    /**
+     * Metoda koja služi za otkrivanje uređaja koji su vidiljivi putem Bluetooth
+     * @param activity - parametar u kojem prosljeđujemo activity
+     * @param context - parametar u kojem se prosljeđuje kontekst
+     * @param myBroadcastReceiver - parametar u kojem prosljeđujemo BroadcastReceiver
+     */
     public  static void discoverBluetoothDevices(Activity activity, Context context, BroadcastReceiver myBroadcastReceiver){
 
         myBluetoothDevices.clear(); //ukoliko smo već otkrili neke, čistimo
@@ -79,6 +91,11 @@ public final class Bluetooth {
         }
     }
 
+    /**
+     * Metoda koja započinje konekciju sa odabranim uređajem iz liste otkrivenih uređaja
+     * @param position - parametar u kojem se prosljeđuje pozicija uređaja u listi otkirvenih uređaja
+     * @param context - parametar u kojem se prosljeđuje kontekst
+     */
     public static void startConnection( int position, Context context){
         myBluetoothAdapter.cancelDiscovery();
 
