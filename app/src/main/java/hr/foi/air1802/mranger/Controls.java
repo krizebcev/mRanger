@@ -232,7 +232,7 @@ public final class Controls {
      */
     public static void insertTemperatueToDB(Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="https://barka.foi.hr/WebDiP/2017/zadaca_05/jkristovi/lp/unos.php?temp="+globTemp;
+        String url ="https://mranger.foi.hr/unos.php?temp="+globTemp;
 
         if (isTemperatureRead) {
             if (proslaTemp == globTemp){
