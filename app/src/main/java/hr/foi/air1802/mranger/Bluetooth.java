@@ -22,6 +22,9 @@ public final class Bluetooth {
     private static String deviceAddress;
     public static String EXTRA_ADDRESS = "device_address";
 
+    /**
+     * Metoda koji služi za stvaranje novog Bluetooth adapter
+     */
     public static void createBluetoothAdapter(){
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
