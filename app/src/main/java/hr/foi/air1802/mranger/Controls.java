@@ -252,6 +252,5 @@ public final class Controls {
             Toast.makeText(context, "Prvo je potrebno očitati temperaturu.", Toast.LENGTH_LONG).show();
 
         }
-
     }
 }

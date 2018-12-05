@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * Klasa koja služi za uključivanje/isključivanje Bluetootha, otkirvanje uređaja i stvaranje konekcije
  */
 public final class Bluetooth {
+
     public static BluetoothAdapter myBluetoothAdapter;
     public static ArrayList<BluetoothDevice> myBluetoothDevices;
     public static ListView listaDiscoveredDevices;
@@ -31,7 +32,6 @@ public final class Bluetooth {
     public static void createBluetoothAdapter(){
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
-
 
     /**
      * Metoda koja služi za uključivanje/isključivanje Bluetootha

@@ -12,18 +12,24 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import java.util.ArrayList;
 
+/**
+ * Početni zaslon koji se otvara prilikom pokretanja aplikacjie.
+ * MainActivity nasljeđuje klasu AppCompactActivity te njegove metode i klase.
+ * Na zaslonu je omogućeno paljenje i gašenje Bluetooth-a te pronalazak uređaja na kojih se može povezat.
+ */
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     //definiranje varijabli
     private Button gumbBTOnOff;
     private Button gumbDiscover;
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(myBroadcastReceiver);
-    }
-
+    /**
+     * Početna metoda koja se izvrši prilikom pokretanja zaslona.
+     * Pronalazak i inicijalizacija elemenata sa zaslona.
+     * Prilikom pritiska na gumbBTOnOff se uključuje ili isključuje Bluetooth
+     * Prilikom pritiska na gumbDiscover se pronalaze i izlistaju svi mogući uređaji na koji se aplikacija možepovezat
+     * @param savedInstanceState - parametar koji sadrži prošlo stanje zaslona kako se nebi izgubili podaci prilikom povratka na isti
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Bluetooth.myBluetoothDevices = new ArrayList<>();
         Bluetooth.createBluetoothAdapter();
 
-        //event za gumb ON/OFF
+        //Paljenje gašenje Bluetooth-a
         gumbBTOnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        //Pronalaženje Bluetooth uređaja
         gumbDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +59,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
     }//kraj OnCreate
 
+    /**
+     * Metoda koja se pokreće prolikom završetka izvođenja Zaslona tj.
+     * u njoj se gase ili brišu razni podaci koji su se dosad koristili.
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myBroadcastReceiver);
+    }
+
+    /**
+     *Inicijalizacija klase BroadcastReceiver koja se brine za odašiljanje infromacija, u ovom slučaju
+     * preko Bluetooth signala
+     */
     BroadcastReceiver myBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -65,6 +86,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     };
 
+    /**
+     * onItemClick je ugrađena metoda koja reagira na pritisak na element iz liste, u ovom slučaju naneki pronađeni Bluetooth uređaj.
+     * Pritiskom na uređaj iz liste, aplikacija se automatski poveže na uređaj te se prelazi na idući zaslon.
+     * @param parent - lista u kojoj se nalaze pronađeni uređaji
+     * @param view - parametar u kojem se prosljeđuje View
+     * @param position - pozicija elementa u listi, neki broj ovisno o duljini liste
+     * @param id - dodatni parametar u kojem se može prosljediti neki dodatni id od kliknutog elementa
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Bluetooth.startConnection( position, getApplicationContext());

@@ -178,5 +178,4 @@ public class KontroleActivity extends AppCompatActivity {
             }
         });
     }
-
 }
