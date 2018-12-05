@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * Klasa koja služi za upravljanje kontrolama na robotu
  */
-public final class Controls {
+public class Controls {
 
     public static String address = null;
     public static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
