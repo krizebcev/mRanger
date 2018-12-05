@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+/**
+ * Klasa koja služi za ostvarivanje i upravljanje Bluetooth konekcijom nad uređajem
+ */
 public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
 {
     Context context;
