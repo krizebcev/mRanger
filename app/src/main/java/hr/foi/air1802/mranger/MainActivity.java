@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 Bluetooth.myBluetoothDevices.add(device);
-                Bluetooth.myDeviceListAdapter = new DeviceListAdapter(context, R.layout.activity_discover, Bluetooth.myBluetoothDevices);
+                Bluetooth.myDeviceListAdapter = new DeviceListAdapter(context, R.layout.discover, Bluetooth.myBluetoothDevices);
                 Bluetooth.listaDiscoveredDevices.setAdapter(Bluetooth.myDeviceListAdapter);
             }
         }
