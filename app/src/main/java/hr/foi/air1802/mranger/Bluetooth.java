@@ -96,13 +96,21 @@ public class Bluetooth {
      * @param position - parametar u kojem se prosljeđuje pozicija uređaja u listi otkirvenih uređaja
      * @param context - parametar u kojem se prosljeđuje kontekst
      */
-    public static void startConnection( int position, Context context){
+    public static void startConnection( int position, Context context, boolean prekidac){
         myBluetoothAdapter.cancelDiscovery();
 
         deviceAddress = myBluetoothDevices.get(position).getAddress();
         myBluetoothDevices.get(position).createBond();
 
-        Intent connection = new Intent(context, KontroleActivity.class);
+        Intent connection=null;
+        if (prekidac==false)
+        {
+            connection = new Intent(context, KontroleActivity.class);
+        }
+        else
+        {
+            connection = new Intent(context, FancyKontroleActivity.class);
+        }
         connection.putExtra(EXTRA_ADDRESS, deviceAddress);
         context.startActivity(connection);
     }

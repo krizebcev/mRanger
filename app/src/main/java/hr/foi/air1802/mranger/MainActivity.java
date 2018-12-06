@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Switch;
+
 import java.util.ArrayList;
 
 /**
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //definiranje varijabli
     private Button gumbBTOnOff;
     private Button gumbDiscover;
+
+    //fancy switch zastavica
+    private Switch prekidac;
 
     /**
      * Početna metoda koja se izvrši prilikom pokretanja zaslona.
@@ -57,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Bluetooth.discoverBluetoothDevices(MainActivity.this, getApplicationContext(),myBroadcastReceiver);
             }
         });
+
+        //fancy switch
+        prekidac = findViewById(R.id.switchFancy);
     }//kraj OnCreate
 
     /**
@@ -96,6 +104,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Bluetooth.startConnection( position, getApplicationContext());
+        Bluetooth.startConnection( position, getApplicationContext(), prekidac.isChecked());
     }
 }
