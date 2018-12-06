@@ -142,6 +142,16 @@ public class Controls {
     }
 
     /**
+     * Metoda koja služi da se robot po potrebi samo zaustavi
+     * @param event objekt u kojem se prosljeđuje događaj
+     * @return
+     */
+    public  static  boolean stopMoving(MotionEvent event){
+        move(0, 0);
+        return true;
+    }
+
+    /**
      * Metoda koja služi za promjenu brzine kretanja robota
      * @param desniMotor brzina desnog motora
      * @param lijeviMotor brzina lijevog motora
@@ -221,6 +231,7 @@ public class Controls {
         {
             try {
                 bluetoothSocket.close(); //prekini vezu
+                bluetoothSocket = null;
             } catch (IOException e) {}
         }
         activity.finish();

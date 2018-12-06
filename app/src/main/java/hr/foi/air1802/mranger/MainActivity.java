@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //fancy switch
         prekidac = findViewById(R.id.switchFancy);
+        prekidac.setChecked(true);
     }//kraj OnCreate
 
     /**
