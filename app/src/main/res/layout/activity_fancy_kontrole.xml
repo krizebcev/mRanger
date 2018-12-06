@@ -25,12 +25,11 @@
         android:layout_width="98dp"
         android:layout_height="118dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:background="#00000000"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/slikaRobotFancy"
         app:srcCompat="@drawable/gore" />
@@ -40,51 +39,44 @@
         android:layout_width="98dp"
         android:layout_height="118dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="152dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
         android:background="#00000000"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonNormalno"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonDesno"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonLijevo"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonGore"
         app:srcCompat="@drawable/dolje" />
 
     <ImageButton
         android:id="@+id/imageButtonDesno"
         android:layout_width="118dp"
         android:layout_height="98dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="88dp"
         android:background="#00000000"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonBrzo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.667"
+        app:layout_constraintStart_toStartOf="@+id/imageButtonGore"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonGore"
         app:srcCompat="@drawable/desno" />
 
     <ImageButton
         android:id="@+id/imageButtonLijevo"
         android:layout_width="118dp"
         android:layout_height="98dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="64dp"
         android:background="#00000000"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonSporo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.667"
+        app:layout_constraintEnd_toEndOf="@+id/imageButtonGore"
+        app:layout_constraintTop_toTopOf="@+id/imageButtonGore"
         app:srcCompat="@drawable/lijevo" />
 
     <ImageButton
         android:id="@+id/imageButtonSporo"
         android:layout_width="97dp"
         android:layout_height="76dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         android:background="#00000000"
@@ -92,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.997"
         app:srcCompat="@drawable/sporo" />
 
     <ImageButton
@@ -114,7 +106,7 @@
         android:layout_width="97dp"
         android:layout_height="76dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:background="#00000000"
         android:scaleType="fitXY"
@@ -123,19 +115,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/brzo" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="57dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#00000000"
-        app:layout_constraintBottom_toTopOf="@+id/imageButtonDolje"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonDesno"
-        app:layout_constraintStart_toEndOf="@+id/imageButtonLijevo"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonGore"
-        app:layout_constraintVertical_bias="0.547" />
 
 </android.support.constraint.ConstraintLayout>
