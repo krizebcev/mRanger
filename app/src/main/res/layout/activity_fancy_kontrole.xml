@@ -12,19 +12,20 @@
         android:layout_width="114dp"
         android:layout_height="119dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/mranger_ikona_fancy" />
 
     <ImageButton
         android:id="@+id/imageButtonGore"
-        android:layout_width="78dp"
-        android:layout_height="94dp"
+        android:layout_width="98dp"
+        android:layout_height="118dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="#00000000"
         android:scaleType="fitXY"
@@ -36,57 +37,54 @@
 
     <ImageButton
         android:id="@+id/imageButtonDolje"
-        android:layout_width="78dp"
-        android:layout_height="94dp"
+        android:layout_width="98dp"
+        android:layout_height="118dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="60dp"
         android:background="#00000000"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/imageButtonNormalno"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonGore"
-        app:layout_constraintVertical_bias="0.739"
         app:srcCompat="@drawable/dolje" />
 
     <ImageButton
         android:id="@+id/imageButtonDesno"
-        android:layout_width="94dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="88dp"
+        android:layout_width="118dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="56dp"
         android:layout_marginBottom="8dp"
         android:background="#00000000"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/imageButtonBrzo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.667"
         app:srcCompat="@drawable/desno" />
 
     <ImageButton
         android:id="@+id/imageButtonLijevo"
-        android:layout_width="94dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="118dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="#00000000"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/imageButtonSporo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.667"
         app:srcCompat="@drawable/lijevo" />
 
     <ImageButton
         android:id="@+id/imageButtonSporo"
         android:layout_width="97dp"
         android:layout_height="76dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         android:background="#00000000"
@@ -94,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.997"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/sporo" />
 
     <ImageButton
@@ -125,5 +123,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/brzo" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="57dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#00000000"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonDolje"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonDesno"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonLijevo"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonGore"
+        app:layout_constraintVertical_bias="0.547" />
 
 </android.support.constraint.ConstraintLayout>
