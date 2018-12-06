@@ -27,7 +27,8 @@
         <activity
             android:name=".KontroleActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".FancyKontroleActivity"></activity>
+        <activity android:name=".FancyKontroleActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
