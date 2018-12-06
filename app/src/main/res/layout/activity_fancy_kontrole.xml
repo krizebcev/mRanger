@@ -29,10 +29,10 @@
         android:layout_marginEnd="8dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:src="@drawable/gore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slikaRobotFancy"
-        app:srcCompat="@drawable/gore" />
+        app:layout_constraintTop_toBottomOf="@+id/slikaRobotFancy" />
 
     <ImageButton
         android:id="@+id/imageButtonDolje"
@@ -43,10 +43,10 @@
         android:layout_marginEnd="8dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:src="@drawable/dolje"
         app:layout_constraintEnd_toEndOf="@+id/imageButtonDesno"
         app:layout_constraintStart_toStartOf="@+id/imageButtonLijevo"
-        app:layout_constraintTop_toTopOf="@+id/imageButtonGore"
-        app:srcCompat="@drawable/dolje" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonGore" />
 
     <ImageButton
         android:id="@+id/imageButtonDesno"
@@ -56,9 +56,9 @@
         android:layout_marginTop="88dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:src="@drawable/desno"
         app:layout_constraintStart_toStartOf="@+id/imageButtonGore"
-        app:layout_constraintTop_toTopOf="@+id/imageButtonGore"
-        app:srcCompat="@drawable/desno" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonGore" />
 
     <ImageButton
         android:id="@+id/imageButtonLijevo"
@@ -68,9 +68,9 @@
         android:layout_marginEnd="64dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:src="@drawable/lijevo"
         app:layout_constraintEnd_toEndOf="@+id/imageButtonGore"
-        app:layout_constraintTop_toTopOf="@+id/imageButtonGore"
-        app:srcCompat="@drawable/lijevo" />
+        app:layout_constraintTop_toTopOf="@+id/imageButtonGore" />
 
     <ImageButton
         android:id="@+id/imageButtonSporo"
@@ -124,9 +124,9 @@
         android:layout_marginTop="16dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:src="@drawable/gumb_disconnect"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/odspoji" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonTemperatura"
@@ -136,9 +136,9 @@
         android:layout_marginEnd="16dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:src="@drawable/gumb_temperatura"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/termometar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewTemperatura"
@@ -164,9 +164,9 @@
         android:layout_marginEnd="16dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:src="@drawable/gumb_dodaj_u_bazu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonTemperatura"
-        app:srcCompat="@drawable/dodaj_temperaturu" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonTemperatura" />
 
 
 

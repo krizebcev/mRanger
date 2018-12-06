@@ -81,21 +81,33 @@ public class FancyKontroleActivity extends AppCompatActivity {
          *  Metoda koja se aktivira na pritisak gumba za kretanje unaprijed.
          */
         gumbForward.setOnTouchListener(new View.OnTouchListener() {
-            @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return Controls.moveForward(event);
+                if (event.getAction() == MotionEvent.ACTION_DOWN ) {
+                    Controls.moveForward(event);
+                    gumbForward.setImageResource(R.drawable.gore_stisnuto);
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP ) {
+                    Controls.moveForward(event);
+                    gumbForward.setImageResource(R.drawable.gore);
+                }
+                return false;
             }
-
-
         });
 
         /**
          * Metoda koja se aktivira na pritisak gumba za kretanje ulijevo.
          */
         gumbLeft.setOnTouchListener(new View.OnTouchListener() {
-            @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return Controls.moveLeft(event);
+                if (event.getAction() == MotionEvent.ACTION_DOWN ) {
+                    Controls.moveLeft(event);
+                    gumbLeft.setImageResource(R.drawable.lijevo_stisnuto);
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP ) {
+                    Controls.moveLeft(event);
+                    gumbLeft.setImageResource(R.drawable.lijevo);
+                }
+                return false;
             }
         });
 
@@ -103,9 +115,16 @@ public class FancyKontroleActivity extends AppCompatActivity {
          * Metoda koja se aktivira na pritisak gumba za kretanje udesno.
          */
         gumbRight.setOnTouchListener(new View.OnTouchListener() {
-            @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return Controls.moveRight(event);
+                if (event.getAction() == MotionEvent.ACTION_DOWN ) {
+                    Controls.moveRight(event);
+                    gumbRight.setImageResource(R.drawable.desno_stisnuto);
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP ) {
+                    Controls.moveRight(event);
+                    gumbRight.setImageResource(R.drawable.desno);
+                }
+                return false;
             }
         });
 
@@ -113,9 +132,16 @@ public class FancyKontroleActivity extends AppCompatActivity {
          * Metoda koja se aktivira na pritisak gumba za kretanje unazad.
          */
         gumbBackwards.setOnTouchListener(new View.OnTouchListener() {
-            @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return  Controls.moveBackwards(event);
+                if (event.getAction() == MotionEvent.ACTION_DOWN ) {
+                    Controls.moveBackwards(event);
+                    gumbBackwards.setImageResource(R.drawable.dolje_stisnuto);
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP ) {
+                    Controls.moveBackwards(event);
+                    gumbBackwards.setImageResource(R.drawable.dolje);
+                }
+                return false;
             }
         });
 
