@@ -36,7 +36,7 @@ public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
      */
     @Override
     protected void onPreExecute() {
-        Toast.makeText(context, "Povezivanje....", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "Povezivanje ...", Toast.LENGTH_SHORT).show();
     }
 
     /**
