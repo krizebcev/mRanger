@@ -1,6 +1,7 @@
 package hr.foi.air1802.mranger;
 
 
+import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -27,6 +28,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     //fancy switch zastavica
     private Switch prekidac;
+
+    /**
+     * Metoda koja čeka pritisak na gumb za povratak na prethodni zaslon.
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        System.exit(0);
+    }
 
     /**
      * Početna metoda koja se izvrši prilikom pokretanja zaslona.
