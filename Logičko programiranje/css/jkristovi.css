@@ -1,0 +1,130 @@
+/* -- OVO JE FOOTER NOVI-- */
+#podnozje {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:232px;
+   width:100%;
+   /*background:#999;*/
+}
+.STEMlogo{
+    height: 128px;
+    width: auto;
+}
+.footerIkone{
+    text-align: center;
+}
+.copyright{
+    text-align: center;
+}
+.copyrightSTEM{
+    text-align: center;
+    color: white;
+}
+/* -- --*/
+
+hr{
+    color: white;
+}
+body {
+    /*background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);*/
+    background: linear-gradient(141deg, rgb(159, 184, 173) 0%, rgb(31, 200, 219) 51%, rgb(44, 181, 232) 75%);
+    /*background: linear-gradient(0deg, rgba(115,167,255,1) 0%, rgba(54,217,255,1) 59%, rgba(55,163,204,1) 100%);*/
+    color: black;
+    font-family:sans-serif;
+}
+h1{
+    color: white;
+}
+.h1Pocetna{
+    text-align: center;
+}
+.LinkDdPrijave ul{
+    list-style:none;
+}
+.LinkDdPrijave li{
+    text-align: right;
+    margin-right: 15px;
+}
+.izbornik {
+    padding: 10px 0px;
+    /*background: linear-gradient(0deg, rgba(0,102,131,1) 0%, rgba(69,188,255,1) 100%); +2  */
+}
+
+.izbornik ul {
+    display: grid;
+    margin: auto;
+    align-content: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 130px);
+    grid-row-gap: 10px;
+    column-count:auto;
+}
+
+.izbornik li {
+    list-style-type: none;
+    align-content: center;
+    justify-content: center;
+    padding: 4px 0px;
+    text-align: center;   
+    transition: all 0.08s ease-out;
+    background-color:#dfd7e2;
+    border-radius: 15px;
+}
+.Okvir{
+    border: cornsilk;
+    margin: 0px 4px;
+}
+.izbNaslov{
+    text-align: center;
+    color:transparent;
+    visibility: hidden;
+    display: none;
+}
+.VrijemeRijesavanja{
+    color:white;
+    font-style: italic;
+    text-align: center;
+}
+
+
+
+
+a:visited{
+    color: brown;
+}
+
+a:hover{
+    color:red;
+}
+
+nav{
+    color:yellow;
+}
+
+
+
+/*TABLICA - ne koristi se za sad*/
+
+.tablica{
+    background-color:#fff491;
+    width:100%;
+}
+.TabHide{
+    /*Namijenjeno Tabletu*/
+}
+.tablica tr:hover{
+    background-color: whitesmoke;
+    color:red;
+}
+.tablicaNaslov{
+    color: white;
+    font-size:large;
+}
+
+.vanjskaOkvir{
+    width: 80%;
+    height: 350px;
+    display: block;
+    margin: auto;
+}

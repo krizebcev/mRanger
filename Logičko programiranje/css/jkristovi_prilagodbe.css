@@ -1,0 +1,74 @@
+@media only screen and (max-width: 750px){
+    /* iPhone 8 width - pixel resolution at 326 dpi */
+
+    body{
+        background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+
+    }
+
+    .gTranslate{
+        margin-left: 45%;
+    }
+
+    .slikaSoba{
+        margin-left: 10%;
+    }
+
+    .divOpisSoba{
+        margin-left: 10%;
+    }
+
+    .obrazacRezervacija{
+        margin-left: 26%; 
+    }
+
+    .slikaAutor {
+        background-image:url(../slike/Autor.JPG); 
+        background-repeat: no-repeat;
+        background-size: 50%;
+        margin-left: 32%;
+        height:250px;   
+    }
+    .slikaHardFeelings {
+        background-image:url(../slike/sorry-webdip.jpg); 
+        background-repeat: no-repeat;
+        background-size: 65%;
+        margin-left: 26%;
+        height:500px;   
+    }
+
+    .Autor{
+        margin-left: 38%;
+    }
+
+    .zaglavljeSlika header{
+        background-image:url(../slike/logo-new.png);
+        background-repeat:no-repeat;
+        background-position: left top;
+        background-size: 30%;
+        height: 10.2%;
+    }
+
+    .eraDok{
+        width: 400px;
+        height: 300px;
+    }
+    .vrsteOglasaTablica{
+        margin-left: 2%;
+    }
+    .lokacijeOglasaTablica{
+        margin-left: 2%;
+    }
+
+    .mobHide{
+        display: none;
+    }
+
+    #zahtjevBlokiranje{
+        margin-left: 25%;
+    }
+
+    #modBlokOglasa{
+        margin-left: 30%;
+    }
+}
