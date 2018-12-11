@@ -31,8 +31,11 @@ foreach ($podaci as &$podatak) {
     $podatakDan = $podaciDatum[day];
     $podatakSat = $podaciDatum[hour];
     $podatakTemperatura = $podatak[1];
-    $cmd="C:\Users\krist\Downloads\swipl\bin\swipl.exe -f provjera_godisnjeg_doba.pl -g provjera_godisnjeg_doba($podatakMjesec,$podatakDan)";
-    $rez .= shell_exec($cmd)."<br>";
+    $cmd="C:\Users\krist\Downloads\swipl\bin\swipl.exe -f provjera_godisnjeg_doba.pl "
+            . "-g provjera_godisnjeg_doba($podatakMjesec,$podatakDan)";
+    $cmd2="C:\Users\krist\Downloads\swipl\bin\swipl.exe -f provjera_prosjecne_temperature.pl "
+            . "-g provjera_prosjecne_temperature($podatakMjesec,$podatakSat,$podatakTemperatura)";
+    $rez .= shell_exec($cmd)." ".shell_exec($cmd2)."<br>";
 }
 ?>
 <!DOCTYPE html>
