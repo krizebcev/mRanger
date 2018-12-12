@@ -2,12 +2,10 @@ package hr.foi.air1802.mranger;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -34,7 +32,7 @@ public class FancyKontroleActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Controls.Disconnect(FancyKontroleActivity.this);
+        Controls.disconnect(FancyKontroleActivity.this);
     }
 
     @Override
@@ -44,7 +42,7 @@ public class FancyKontroleActivity extends AppCompatActivity {
 
         Intent newint = getIntent();
         messages = new StringBuilder();
-        Controls.address = newint.getStringExtra(Bluetooth.EXTRA_ADDRESS);
+        Controls.address = newint.getStringExtra(Bluetooth.extraAddress);
         new ConnectBT(getApplicationContext(),FancyKontroleActivity.this).execute(); //konekcija
         gumbDisconnect = findViewById(R.id.imageButtonOdspoji);
 
@@ -74,7 +72,7 @@ public class FancyKontroleActivity extends AppCompatActivity {
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Controls.Disconnect(FancyKontroleActivity.this);
+                Controls.disconnect(FancyKontroleActivity.this);
             }
         });
         /**

@@ -22,10 +22,6 @@ import java.util.ArrayList;
  */
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    //definiranje varijabli
-    private Button gumbBTOnOff;
-    private Button gumbDiscover;
-
     //fancy switch zastavica
     private Switch prekidac;
 
@@ -51,8 +47,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gumbBTOnOff = findViewById(R.id.gumbBTOnOff);
-        gumbDiscover = findViewById(R.id.gumbDiscover);
+        //definiranje varijabli
+        Button gumbBTOnOff = findViewById(R.id.gumbBTOnOff);
+        Button gumbDiscover = findViewById(R.id.gumbDiscover);
         Bluetooth.listaDiscoveredDevices = findViewById(R.id.listaDiscDevices);
         Bluetooth.listaDiscoveredDevices.setOnItemClickListener(MainActivity.this);
         Bluetooth.myBluetoothDevices = new ArrayList<>();
@@ -70,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         gumbDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bluetooth.myBluetoothDevices.clear();
                 Bluetooth.discoverBluetoothDevices(MainActivity.this, getApplicationContext(),myBroadcastReceiver);
             }
         });

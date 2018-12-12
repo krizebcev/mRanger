@@ -31,7 +31,7 @@ public class KontroleActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Controls.Disconnect(KontroleActivity.this);
+        Controls.disconnect(KontroleActivity.this);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class KontroleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kontrole);
         Intent newint = getIntent();
         messages = new StringBuilder();
-        Controls.address = newint.getStringExtra(Bluetooth.EXTRA_ADDRESS);
+        Controls.address = newint.getStringExtra(Bluetooth.extraAddress);
         new ConnectBT(getApplicationContext(),KontroleActivity.this).execute(); //konekcija
         gumbDisconnect = findViewById(R.id.gumbDisconnect);
 
@@ -70,7 +70,7 @@ public class KontroleActivity extends AppCompatActivity {
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Controls.Disconnect(KontroleActivity.this);
+                Controls.disconnect(KontroleActivity.this);
             }
         });
 

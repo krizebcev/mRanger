@@ -19,12 +19,14 @@ import java.util.ArrayList;
  */
 public class Bluetooth {
 
-    public static BluetoothAdapter myBluetoothAdapter;
-    public static ArrayList<BluetoothDevice> myBluetoothDevices;
-    public static ListView listaDiscoveredDevices;
-    public static DeviceListAdapter myDeviceListAdapter;
-    private static String deviceAddress;
-    public static String EXTRA_ADDRESS = "device_address";
+    private Bluetooth(){ }
+
+    protected static BluetoothAdapter myBluetoothAdapter;
+    protected static ArrayList<BluetoothDevice> myBluetoothDevices;
+    protected static ListView listaDiscoveredDevices;
+    protected static DeviceListAdapter myDeviceListAdapter;
+    protected static String deviceAddress;
+    protected static String extraAddress = "device_address";
 
     /**
      * Metoda koji služi za stvaranje novog Bluetooth adaptera
@@ -63,9 +65,8 @@ public class Bluetooth {
      * @param myBroadcastReceiver - parametar u kojem prosljeđujemo BroadcastReceiver
      */
     public  static void discoverBluetoothDevices(Activity activity, Context context, BroadcastReceiver myBroadcastReceiver){
-
         myBluetoothDevices.clear(); //ukoliko smo već otkrili neke, čistimo
-
+        listaDiscoveredDevices.setAdapter(null);//ukoliko smo već otkrili neke, čistimo
         if (myBluetoothAdapter.isDiscovering()) {
 
             myBluetoothAdapter.cancelDiscovery(); //poništi otkrivanje
@@ -103,7 +104,7 @@ public class Bluetooth {
         myBluetoothDevices.get(position).createBond();
 
         Intent connection=null;
-        if (prekidac==false)
+        if (!prekidac)
         {
             connection = new Intent(context, KontroleActivity.class);
         }
@@ -111,7 +112,7 @@ public class Bluetooth {
         {
             connection = new Intent(context, FancyKontroleActivity.class);
         }
-        connection.putExtra(EXTRA_ADDRESS, deviceAddress);
+        connection.putExtra(extraAddress, deviceAddress);
         context.startActivity(connection);
     }
 }

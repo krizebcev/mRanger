@@ -19,6 +19,7 @@ public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
     private ArrayList<BluetoothDevice> myDevices;
     private LayoutInflater myLayoutInflater;
     private int myResourceId;
+    View sonarQubeView;
 
     /**
      * Konstruktor za klasu DeviceListAdapter
@@ -41,15 +42,16 @@ public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
      * @param parent - grupa u kojoj se nalazi naš View.
      * @return
      */
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        convertView = myLayoutInflater.inflate(myResourceId, null);
+        sonarQubeView = convertView;
+        sonarQubeView = myLayoutInflater.inflate(myResourceId, null);
 
         BluetoothDevice device = myDevices.get(position);
 
         if (device != null) {
-            TextView deviceName = convertView.findViewById(R.id.labelDeviceName);
-            TextView deviceAdress = convertView.findViewById(R.id.labelDeviceAddress);
+            TextView deviceName = sonarQubeView.findViewById(R.id.labelDeviceName);
+            TextView deviceAdress = sonarQubeView.findViewById(R.id.labelDeviceAddress);
 
             if (deviceName != null) {
                 deviceName.setText(device.getName());
@@ -58,6 +60,6 @@ public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
                 deviceAdress.setText(device.getAddress());
             }
         }
-        return convertView;
+        return sonarQubeView;
     }
 }

@@ -29,15 +29,7 @@ public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
         this.activity=activity;
     }
 
-    private boolean ConnectSuccess = true; //ako smo došli do ovdje, skoro smo se spojili
-
-    /**
-     * Metoda koja ispisuje "Povezivanje...." dok se ne ostvari bluetooth veza između uređaja.
-     */
-    @Override
-    protected void onPreExecute() {
-        //Toast.makeText(context, "Povezivanje ...", Toast.LENGTH_SHORT).show();
-    }
+    private boolean sonarConnectSuccess = true; //ako smo došli do ovdje, skoro smo se spojili
 
     /**
      * Stvaranje bluetooth veze između uređaja.
@@ -64,7 +56,7 @@ public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
                 Controls.bluetoothSocket.connect();//počinje spajanje
             }
         } catch (IOException e) {
-            ConnectSuccess = false;//ako se nismo uspjeli spojiti
+            sonarConnectSuccess = false;//ako se nismo uspjeli spojiti
         }
         return null;
     }
@@ -78,7 +70,7 @@ public class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
     {
         super.onPostExecute(result);
 
-        if (!ConnectSuccess) {
+        if (!sonarConnectSuccess) {
             Toast.makeText(context, "Povezivanje neuspješno", Toast.LENGTH_SHORT).show();
             activity.finish();
         } else {

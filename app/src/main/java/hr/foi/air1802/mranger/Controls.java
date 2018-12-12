@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
@@ -24,11 +25,13 @@ import java.util.UUID;
  */
 public class Controls {
 
-    public static String address = null;
+    private Controls(){}
+
+    protected static String address = null;
     public static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    public static BluetoothAdapter myBluetoothAdapter = null;
-    public static BluetoothSocket bluetoothSocket = null;
-    public static boolean isBluetoothConnected = false;
+    protected static BluetoothAdapter myBluetoothAdapter = null;
+    protected static BluetoothSocket bluetoothSocket = null;
+    protected static boolean isBluetoothConnected = false;
     private static float globTemp;
     private static boolean isTemperatureRead=false;
     private static float proslaTemp;
@@ -36,9 +39,9 @@ public class Controls {
     //podaci za kretanje
     private static byte[] cmd = new byte[13];
     public static final int WRITEMODULE = 2;
-    public static final int type = 5;
-    private static int DesniMotor = 180;
-    private static int LijeviMotor = 180;
+    public static final int TYPE = 5;
+    private static int desniMotor = 180;
+    private static int lijeviMotor = 180;
 
     /**
      * Metoda u kojoj se šalju podaci za kretanje robota
@@ -51,7 +54,7 @@ public class Controls {
         cmd[2] = (byte) 8;
         cmd[3] = (byte) 0;
         cmd[4] = (byte) WRITEMODULE;
-        cmd[5] = (byte) type;
+        cmd[5] = (byte) TYPE;
         final ByteBuffer buf = ByteBuffer.allocate(4);
         buf.putShort((short) lijeviMotor);
         buf.putShort((short) desniMotor);
@@ -70,6 +73,7 @@ public class Controls {
         try {
             bluetoothSocket.getOutputStream().write(cmd);
         } catch (IOException e) {
+            Log.e("IOEx","IOException exception at bluetoothSocket.getOutputStream().write(cmd)", e);
         }
     }
 
@@ -81,7 +85,7 @@ public class Controls {
     public static boolean moveForward(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-            move(-LijeviMotor, DesniMotor);
+            move(-lijeviMotor, desniMotor);
 
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -98,7 +102,7 @@ public class Controls {
     public static boolean moveLeft(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-            move(-LijeviMotor, -DesniMotor);
+            move(-lijeviMotor, -desniMotor);
 
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -115,7 +119,7 @@ public class Controls {
     public static boolean moveRight(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-            move(LijeviMotor, DesniMotor);
+            move(lijeviMotor, desniMotor);
 
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -132,7 +136,7 @@ public class Controls {
     public  static  boolean moveBackwards(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-            move(LijeviMotor, -DesniMotor);
+            move(lijeviMotor, -desniMotor);
 
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -147,8 +151,8 @@ public class Controls {
      * @param lijeviMotor brzina lijevog motora
      */
     public static void changeSpeed(int desniMotor, int lijeviMotor) {
-        DesniMotor = desniMotor;
-        LijeviMotor = lijeviMotor;
+        Controls.desniMotor = desniMotor;
+        Controls.lijeviMotor = lijeviMotor;
     }
 
     /**
@@ -181,8 +185,6 @@ public class Controls {
                 byte[] podaci = new byte[1024];
                 int count = inputStream.read(podaci);
 
-                if (podaci != null) {
-
                     List<Byte> listaBajtova = new ArrayList<>();
 
                     if (count > 0) {
@@ -198,9 +200,10 @@ public class Controls {
                             listaBajtova.clear();
                         }
                     }
-                }
             }
-        } catch (IOException e) {        }
+        } catch (IOException e) {
+            Log.e("IOEx","IOException exception at InputStream inputStream = bluetoothSocket.getInputStream()", e);
+        }
 
         String[] dijelovi = test.split(" ");
         test = dijelovi[6]; // dohvaćamo sa 6. indeksa buffera
@@ -216,13 +219,15 @@ public class Controls {
      * Metoda koja služi za prekid Bluetooth veze s robotom
      * @param activity aktivnost koja se završava ovom metodom
      */
-    public static void Disconnect(Activity activity) {
+    public static void disconnect(Activity activity) {
         if (bluetoothSocket != null) //ako smo spojeni
         {
             try {
                 bluetoothSocket.close(); //prekini vezu
                 bluetoothSocket = null;
-            } catch (IOException e) {}
+            } catch (IOException e) {
+                Log.e("IOEx","IOException exception at bluetoothSocket.close();", e);
+            }
         }
         activity.finish();
     }
