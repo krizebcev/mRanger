@@ -114,5 +114,6 @@ public class Bluetooth {
         }
         connection.putExtra(extraAddress, deviceAddress);
         context.startActivity(connection);
+        Controls.changeSpeed(180, 180);
     }
 }
