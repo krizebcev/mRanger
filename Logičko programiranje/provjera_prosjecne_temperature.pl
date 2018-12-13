@@ -39,8 +39,8 @@ provjera_doba_dana( Sati, Doba ) :-
 % prosjecne temperature. Te cinjenice su naša baza znanja,
 % te cemo ulaznu temperaturu usporedivati s njima.
 
-% Cinjenice su zapisane u sljedecem formatu,
-% kojeg jš nazivamo bazom znanja:
+% Cinjenice jos nazivamo bazom znanja,
+% te su zapisane u sljedecem formatu:
 % cinjenica(Mjesec, Doba, Temperatura).
 
 cinjenica( 1, jutro, -4.8 ).

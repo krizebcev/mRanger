@@ -2,39 +2,47 @@
 require("baza.class.php");
 error_reporting(E_ALL & ~E_NOTICE);
 
-/*$db = new Baza; dohvacanje iz baze
+$db = new Baza;
 $db->spojiDB();
 
-$podaci = array();
+$podaciVelikiJedan = array ();
+$podaciVelikiDeset = array ();
             
-$zadnjihDeset="SELECT vrijeme, temperatura FROM lp_test ORDER BY vrijeme DESC LIMIT 10;";
-$rezultat = $db->selectDB($zadnjihDeset);
+$zadnjihDeset="SELECT vrijeme, temperatura FROM temperatura ORDER BY vrijeme DESC LIMIT 10;";
+$rezultatDeset = $db->selectDB($zadnjihDeset);
 
-while (list($vrijeme, $temperatura) = $rezultat->fetch_array()) {
-    $element = $vrijeme." - ".$temperatura;
-    array_push($podaci, $element);
-}            
-$db->zatvoriDB();*/
+$zadnjihJedan="SELECT vrijeme, temperatura FROM temperatura ORDER BY vrijeme DESC LIMIT 1;";
+$rezultatJedan = $db->selectDB($zadnjihJedan);
 
-$podaci = array
-  (
-  array("2018-12-12 18:55:13", 22),
-  array("2018-10-12 18:55:16", 23),
-  array("2018-12-21 18:55:19", 24),
-  array("2018-7-12 18:55:21", 25)
-  );
+$db->zatvoriDB();
+
+while (list($vrijeme, $temperatura) = $rezultatJedan->fetch_array()) 
+{
+    $podaciJedan = array();
+    array_push($podaciJedan, $vrijeme);
+    array_push($podaciJedan, $temperatura);
+    array_push($podaciVelikiJedan, $podaciJedan);
+}
+
+while (list($vrijeme, $temperatura) = $rezultatDeset->fetch_array()) 
+{
+    $podaciDeset = array();
+    array_push($podaciDeset, $vrijeme);
+    array_push($podaciDeset, $temperatura);
+    array_push($podaciVelikiDeset, $podaciDeset);
+}
 
 $rez;
-foreach ($podaci as &$podatak) {
+foreach ($podaciVelikiJedan as &$podatak) {
     $podaciDatum = date_parse($podatak[0]);
     $podatakMjesec = $podaciDatum[month];
-    $podatakDan = $podaciDatum[day];
+    $podatakDan = $podaciDatum[day];     //swipl -q -f provjera_godisnjeg_doba.pl -t "provjera_godisnjeg_doba(1,1)"
     $podatakSat = $podaciDatum[hour];
     $podatakTemperatura = $podatak[1];
-    $cmd="C:\Users\krist\Downloads\swipl\bin\swipl.exe -f provjera_godisnjeg_doba.pl "
-            . "-g provjera_godisnjeg_doba($podatakMjesec,$podatakDan)";
-    $cmd2="C:\Users\krist\Downloads\swipl\bin\swipl.exe -f provjera_prosjecne_temperature.pl "
-            . "-g provjera_prosjecne_temperature($podatakMjesec,$podatakSat,$podatakTemperatura)";
+    $cmd="swipl -q -f provjera_godisnjeg_doba.pl -t "
+            . "\"provjera_godisnjeg_doba($podatakMjesec,$podatakDan)\"";
+    $cmd2="swipl -q -f provjera_prosjecne_temperature.pl -t "
+            . "\"provjera_prosjecne_temperature($podatakMjesec,$podatakSat,$podatakTemperatura)\"";
     $rez .= shell_exec($cmd)." ".shell_exec($cmd2)."<br>";
 }
 ?>

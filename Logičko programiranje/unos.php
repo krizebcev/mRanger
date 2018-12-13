@@ -8,7 +8,8 @@ if(isset($_GET["temp"])){
 	
 	$temp = $_GET["temp"];
 	$floatTemp = (float) $temp;
-	$sql = "INSERT INTO lp_test(temperatura) VALUES($floatTemp)";
+	
+	$sql = "INSERT INTO temperatura(temperatura) VALUES($floatTemp)";
 	$bp->selectDB($sql);
 }
  
