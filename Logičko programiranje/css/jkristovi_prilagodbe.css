@@ -5,6 +5,11 @@
         background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
 
     }
+    
+    h1{
+    color: white;
+    font-size: 40px;
+	}
 
     .gTranslate{
         margin-left: 45%;

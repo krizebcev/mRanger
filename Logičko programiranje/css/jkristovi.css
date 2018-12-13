@@ -1,6 +1,6 @@
 /* -- OVO JE FOOTER NOVI-- */
 #podnozje {
-   position:fixed;
+   /*position:fixed;*/
    left:0px;
    bottom:0px;
    height:232px;
@@ -35,6 +35,7 @@ body {
 }
 h1{
     color: white;
+    font-size: 40px;
 }
 .h1Pocetna{
     text-align: center;

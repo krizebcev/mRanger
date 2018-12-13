@@ -70,7 +70,7 @@ foreach ($podaciVelikiJedan as &$podatak) {
 
         <br><br>
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br>
 
         <section id="podnozje">
             <footer>
