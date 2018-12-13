@@ -47,66 +47,6 @@ foreach ($podaciVelikiJedan as &$podatak) {
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript">
-window.onload = function () {
-
-var chart = new CanvasJS.Chart("chartContainer2", {
-    theme: "light1", // "light2", "dark1", "dark2"
-    animationEnabled: false, // change to true      
-    title:{
-        text: "Basic Column Chart"
-    },
-    data: [
-    {
-        // Change type to "bar", "area", "spline", "pie",etc.
-        type: "column",
-        dataPoints: [
-            { label: "2018-12-13",  y: 10  },
-            { label: "2018-12-12", y: 15  },
-            { label: "2018-12-12", y: 16  },
-            { label: "2018-12-11",  y: 18  },
-            { label: "2018-12-11",  y: 19  }
-        ]
-    }
-    ]
-});
-chart.render();
-
-}
-</script>
-<script type="text/javascript">
-        function crtaj(){
-            
-            var rezultat = <?php echo json_encode($podaciVelikiDeset, JSON_HEX_TAG); ?>;
-            
-            var mojiPodaci = [];
-            for (var i = 0; i < rezultat.length;i++){
-                    mojiPodaci.push({"label":rezultat[i].datum, "y":parseFloat(rezultat[i].temperatura)});
-                }
-            
-            var chart = new CanvasJS.Chart("chartContainer2", {
-                animationEnabled:false,
-                //zoomEnabled:true,
-                //panEnabled:true,
-                
-                theme: "light1",
-                title:{
-                    text: "Statistika zadnjih deset temperatura"
-                },
-                axisY:{
-                    title: "Temperatura"
-                },
-                axisX:{
-                    title: "Datum"
-                },
-                data:[{
-                        type: "column",
-                        dataPoints: mojiPodaci
-                }]
-            });
-            chart.render();
-        }
-    </script>
         <title>mRanger</title>
         <meta charset="UTF-8">
         <meta name="author" content="Jakov Kristović">
@@ -117,7 +57,7 @@ chart.render();
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
     </head>
-    <body>
+    <body onload="crtaj()">
         <h1 class="h1Pocetna">mRanger temperatura</h1>
         
         <br><br>
@@ -130,7 +70,6 @@ chart.render();
 
         <br><br>
         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
         <section id="podnozje">
@@ -144,4 +83,36 @@ chart.render();
             </footer>
         </section>
     </body>
+    <script type="text/javascript">
+        function crtaj(){
+            var rezultat = <?php echo json_encode($podaciVelikiDeset, JSON_HEX_TAG); ?>;
+            
+            var mojiPodaci = [];
+            for (var i = 0; i < rezultat.length;i++){
+                    mojiPodaci.push({"label":rezultat[i].datum, "y":parseFloat(rezultat[i].temperatura)});
+                }
+        
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled:true,
+                zoomEnabled:true,
+                panEnabled:true,
+                
+                theme: "light1",
+                title:{
+                    text: "Statistika zadnjih deset temperatura"
+                },
+                axisY:{
+                    title: "Temperatura"
+                },
+                axisX:{
+                    title: "Vrijeme"
+                },
+                data:[{
+                        type: "column",
+                        dataPoints: mojiPodaci
+                }]
+            });
+            chart.render();
+        }
+    </script>
 </html>
