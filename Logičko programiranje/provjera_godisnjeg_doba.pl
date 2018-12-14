@@ -1,5 +1,3 @@
-% Author: Jakov
-% Date: 10.12.2018.
 
 provjera_godisnjeg_doba( UlazniMjesec, UlazniDan ) :-
                                 godisnje_doba( UlazniMjesec, UlazniDan, Ispis ),

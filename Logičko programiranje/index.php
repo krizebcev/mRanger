@@ -34,7 +34,7 @@ $rez;
 foreach ($podaciVelikiJedan as &$podatak) {
     $podaciDatum = date_parse($podatak[0]);
     $podatakMjesec = $podaciDatum[month];
-    $podatakDan = $podaciDatum[day];     //swipl -q -f provjera_godisnjeg_doba.pl -t "provjera_godisnjeg_doba(1,1)"
+    $podatakDan = $podaciDatum[day];
     $podatakSat = $podaciDatum[hour];
     $podatakTemperatura = $podatak[1];
     $cmd="swipl -q -f provjera_godisnjeg_doba.pl -t "

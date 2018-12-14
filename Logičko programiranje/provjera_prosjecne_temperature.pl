@@ -1,5 +1,3 @@
-% Author: Jakov
-% Date: 11.12.2018.
 
 % Sljedeci dio koji mormao napraviti je za unesene podatke
 % o mjesecu i vremenu u kojem je ocitana temperatura,
