@@ -1,3 +1,5 @@
+<?php
+
 function provjera_godisnjeg_doba($UlazniMjesec,$UlazniDan){
 
 $Mjesec=$UlazniMjesec;
@@ -88,3 +90,5 @@ if($Mjesec==12 && $Dan>=21)
 return $Ispis;
 
 }
+
+?>

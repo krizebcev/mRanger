@@ -1,3 +1,5 @@
+<?php
+
 function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperatura)
 {
 	$Mjesec=$UlazniMjesec;
@@ -255,4 +257,6 @@ function provjera_temperature($Temperatura,$ProsjecnaTemperatura){
 	
 	return=$Ispis;
 }
+
+?>
 
