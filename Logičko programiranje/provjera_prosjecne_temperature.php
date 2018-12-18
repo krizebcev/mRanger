@@ -10,37 +10,37 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 
 	$Ispis;
 
-	if($Sati>=20)
+	if ($Sati>=20)
 		$Doba="noc";
-	if($Sati<6)
+	else if ($Sati<6)
 		$Doba="noc";
-	if($Sati>=6 && $Sati<12)
+	else if ($Sati>=6 && $Sati<12)
 		$Doba="jutro";
-	if($Sati>=12 && $Sati<20)
+	else if ($Sati>=12 && $Sati<20)
 		$Doba="dan";
 		
-	if($Mjesec==1)
+	if ($Mjesec==1)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=-4.8;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
 		}
-		else if($Doba=="dan")
+		else if ($Doba=="dan")
 		{
 			$ProsjecnaTemperatura=-1.1;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
 		}
-		else if($Doba=="noc")
+		else if ($Doba=="noc")
 		{
 			$ProsjecnaTemperatura=-8.5;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
 		}
 	}
 
-	if($Mjesec==2)
+	else if ($Mjesec==2)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=4;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -57,9 +57,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}
 	}
 
-	if($Mjesec==3)
+	else if ($Mjesec==3)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=9.3;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -76,9 +76,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}
 	}
 
-	if($Mjesec==4)
+	else if ($Mjesec==4)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=10.4;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -95,9 +95,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}		
 	}
 
-	if($Mjesec==5)
+	else if ($Mjesec==5)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=15.8;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -114,9 +114,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}		
 	}
 
-	if($Mjesec==6)
+	else if ($Mjesec==6)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=20.7;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -133,9 +133,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}		
 	}
 
-	if($Mjesec==7)
+	else if ($Mjesec==7)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=21.8;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -152,9 +152,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}		
 	}
 
-	if($Mjesec==8)
+	else if ($Mjesec==8)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=21.4;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -172,9 +172,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		
 	}
 
-	if($Mjesec==9)
+	else if ($Mjesec==9)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=14.2;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -191,9 +191,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}		
 	}
 
-	if($Mjesec==10)
+	else if ($Mjesec==10)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=11,7;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -210,9 +210,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}		
 	}
 
-	if($Mjesec==11)
+	else if ($Mjesec==11)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=5.6;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -229,9 +229,9 @@ function provjera_prosjecne_temperature($UlazniMjesec,$UlazniSat,$UlaznaTemperat
 		}		
 	}
 
-	if($Mjesec==12)
+	else if ($Mjesec==12)
 	{
-		if($Doba=="jutro")
+		if ($Doba=="jutro")
 		{
 			$ProsjecnaTemperatura=2.4;
 			$Ispis=provjera_temperature($Temperatura,$ProsjecnaTemperatura);
@@ -255,11 +255,11 @@ function provjera_temperature($Temperatura,$ProsjecnaTemperatura){
 
 	$Ispis;
 
-	if($Temperatura>$ProsjecnaTemperatura)
+	if ($Temperatura>$ProsjecnaTemperatura)
 	{
 		$Ispis="Temperatura je veca od prosjeka za ovo doba dana u mjesecu.";
 	}
-	else if($Temperatura < $ProsjecnaTemperatura)
+	else if ($Temperatura < $ProsjecnaTemperatura)
 	{
 		$Ispis = "Temperatura je manja od prosjeka za ovo doba dana u mjesecu."
 	}
