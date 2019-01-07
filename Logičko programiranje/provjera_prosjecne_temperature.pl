@@ -14,7 +14,17 @@ provjera_prosjecne_temperature( UlazniMjesec, UlazniSat, UlaznaTemperatura ) :-
 % Sukladno tome, napravljene su sljedece provjere koje
 % ce vracati doba dana.
 
-% Jednostavniji i duži naæin rješavanja problema doba_dana
+% Složeniji ali kraci nacin rješavanja problema doba_dana
+		
+provjera_doba_dana( Sati, Doba ):-
+    Sati >= 20 -> Doba = noc;
+    Sati < 6 -> Doba = noc;
+    Sati >= 6, Sati < 12 -> Doba = jutro;
+    Sati >= 12, Sati < 20 -> Doba = dan.
+	
+/*
+% Jednostavniji i duži nacin rješavanja problema doba_dana
+
 provjera_doba_dana( Sati, Doba ) :-
                     Sati >= 20,
                     Doba = noc.
@@ -33,12 +43,7 @@ provjera_doba_dana( Sati, Doba ) :-
                     Sati < 20,
                     Doba = dan.
 
-% Složeniji ali kraæi naæin rješavanja problema doba_dana		
-provjera_doba_dana( Sati, Doba ):-
-    Sati >= 20 -> Doba = noc;
-    Sati < 6 -> Doba = noc;
-    Sati >= 6, Sati < 12 -> Doba = jutro;
-    Sati >= 12, Sati < 20 -> Doba = dan.
+*/
                     
 % Mi smo izracunali neke cinjenice, u kojima samo za
 % odredeni mjesec i njegovo doba dana odredili
