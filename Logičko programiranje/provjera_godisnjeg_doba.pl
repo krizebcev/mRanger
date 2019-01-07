@@ -3,12 +3,15 @@ provjera_godisnjeg_doba( UlazniMjesec, UlazniDan ) :-
                                 godisnje_doba( UlazniMjesec, UlazniDan, Ispis ),
                                 write( Ispis ).
 
-%Složeniji ali kraci nacin pronalaženja godišnjeg doba		   
+%Slozeniji ali kraci nacin pronalazenja godisnjeg doba.
+%Kod nizanja uvjeta u slozenom predikatu ',' (zarez) predstavlja
+%logicko 'i', dok ';' (tocka zarez) predstavlja logicko 'ili'.
+		   
 godisnje_doba( Mjesec, Dan, Ispis):-
 
-	% U prvom mjesecu je sigurno godišnje doba zima, tako da dan ne moramo provjeravat.
+	% U prvom mjesecu je sigurno godisnje doba zima, tako da dan ne moramo provjeravat.
     Mjesec=1 -> Ispis="Godisnje doba je zima!";
-	% U drugom mjesecu je sigurno godišnje doba zima, tako da dan ne moramo provjeravat.
+	% U drugom mjesecu je sigurno godisnje doba zima, tako da dan ne moramo provjeravat.
     Mjesec=2 -> Ispis="Godisnje doba je zima!";
 	% U trecem mjesecu ukoliko je dan veci ili jednak 21, pocinje proljece, tako da dan moramo provjeravat.
     Mjesec=3, Dan =< 20 -> Ispis="Godisnje doba je zima!";
@@ -33,7 +36,7 @@ godisnje_doba( Mjesec, Dan, Ispis):-
 
 
 /*
-%Jednostavniji ali znatno duži nacin pronalaženja godišnjeg doba
+%Jednostavniji ali znatno duzi nacin pronalazenja godišnjeg doba
 godisnje_doba( Mjesec, _, Ispis ) :-                    % U prvom mjesecu je sigurno godišnje doba zima,
                Mjesec = 1,                              % tako da dan ne moramo provjeravat.
                Ispis = "Godisnje doba je zima!".
