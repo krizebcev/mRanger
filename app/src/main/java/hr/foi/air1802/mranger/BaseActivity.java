@@ -12,6 +12,15 @@ public class BaseActivity extends AppCompatActivity {
     private String mode;
     private Fragment mFragment;
 
+    /**
+     * Metoda koja čeka pritisak na gumb za povratak na prethodni zaslon.
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Controls.disconnect(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +31,12 @@ public class BaseActivity extends AppCompatActivity {
         mode = newint.getStringExtra(Bluetooth.extraFancy);
         new ConnectBT(getApplicationContext(),this).execute();
 
-        if (mode=="true"){
+        //ne radi operator ==, treba ici equals
+        if (mode.equals("true")){
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new fFancyKontrole()).commit();
         }
         else{
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new fFancyKontrole()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new fBasicKontrole()).commit();
         }
 
     }
