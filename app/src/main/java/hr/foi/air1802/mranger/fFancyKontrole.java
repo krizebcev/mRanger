@@ -1,15 +1,21 @@
 package hr.foi.air1802.mranger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class FancyKontroleActivity extends AppCompatActivity {
+
+public class fFancyKontrole extends Fragment {
 
     ImageButton gumbDisconnect;
     ImageButton gumbForward;
@@ -26,44 +32,40 @@ public class FancyKontroleActivity extends AppCompatActivity {
     TextView textViewTemperatura;
 
     StringBuilder messages;
-    /**
-     * Metoda koja čeka pritisak na gumb za povratak na prethodni zaslon.
-     */
+
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Controls.disconnect(FancyKontroleActivity.this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_fancy, container, false);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fancy_kontrole);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        Intent newint = getIntent();
+
         messages = new StringBuilder();
-        Controls.address = newint.getStringExtra(Bluetooth.extraAddress);
-        new ConnectBT(getApplicationContext(),FancyKontroleActivity.this).execute(); //konekcija
-        gumbDisconnect = findViewById(R.id.imageButtonOdspoji);
+        gumbDisconnect = getView().findViewById(R.id.imageButtonOdspoji);
 
         //kretanje
-        gumbForward = findViewById(R.id.imageButtonGore);
-        gumbLeft = findViewById(R.id.imageButtonLijevo);
-        gumbRight = findViewById(R.id.imageButtonDesno);
-        gumbBackwards = findViewById(R.id.imageButtonDolje);
+        gumbForward = getView().findViewById(R.id.imageButtonGore);
+        gumbLeft = getView().findViewById(R.id.imageButtonLijevo);
+        gumbRight = getView().findViewById(R.id.imageButtonDesno);
+        gumbBackwards = getView().findViewById(R.id.imageButtonDolje);
 
         //brzine
-        gumbSporo = findViewById(R.id.imageButtonSporo);
-        gumbNormalno = findViewById(R.id.imageButtonNormalno);
-        gumbBrzo = findViewById(R.id.imageButtonBrzo);
+        gumbSporo = getView().findViewById(R.id.imageButtonSporo);
+        gumbNormalno = getView().findViewById(R.id.imageButtonNormalno);
+        gumbBrzo = getView().findViewById(R.id.imageButtonBrzo);
 
         //boje gumbova brzina
         gumbNormalno.setImageResource(R.drawable.normalno_stisnuto);
 
         //temperatura
-        gumbTemperatura = findViewById(R.id.imageButtonTemperatura);
-        gumbPohraniTemperaturu=findViewById(R.id.imageButtonDodajTemp);
-        textViewTemperatura = findViewById(R.id.textViewTemperatura);
+        gumbTemperatura = getView().findViewById(R.id.imageButtonTemperatura);
+        gumbPohraniTemperaturu=getView().findViewById(R.id.imageButtonDodajTemp);
+        textViewTemperatura = getView().findViewById(R.id.textViewTemperatura);
         textViewTemperatura.setTextColor(Color.WHITE);
 
         /**
@@ -72,7 +74,7 @@ public class FancyKontroleActivity extends AppCompatActivity {
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Controls.disconnect(FancyKontroleActivity.this);
+                Controls.disconnect(getActivity());
             }
         });
         /**
@@ -202,7 +204,7 @@ public class FancyKontroleActivity extends AppCompatActivity {
         gumbPohraniTemperaturu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.insertTemperatueToDB(getApplicationContext());
+                Controls.insertTemperatueToDB(getContext());
             }
         });
     }

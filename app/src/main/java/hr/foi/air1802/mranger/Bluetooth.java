@@ -27,6 +27,7 @@ public class Bluetooth {
     protected static DeviceListAdapter myDeviceListAdapter;
     protected static String deviceAddress;
     protected static String extraAddress = "device_address";
+    protected  static String extraFancy = "fancy_mode";
 
     /**
      * Metoda koji služi za stvaranje novog Bluetooth adaptera
@@ -104,15 +105,19 @@ public class Bluetooth {
         myBluetoothDevices.get(position).createBond();
 
         Intent connection=null;
+        String mode;
         if (!prekidac)
         {
-            connection = new Intent(context, KontroleActivity.class);
+            mode = "false";
+            connection = new Intent(context, BaseActivity.class);
         }
         else
         {
-            connection = new Intent(context, FancyKontroleActivity.class);
+            mode = "true";
+            connection = new Intent(context, BaseActivity.class);
         }
         connection.putExtra(extraAddress, deviceAddress);
+        connection.putExtra(extraFancy,  mode);
         context.startActivity(connection);
         Controls.changeSpeed(180, 180);
     }

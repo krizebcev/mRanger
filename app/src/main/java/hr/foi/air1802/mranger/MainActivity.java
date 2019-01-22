@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    //fancy switch zastavica
+    //fFancyKontrole switch zastavica
     private Switch prekidac;
 
     /**
@@ -72,9 +72,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        //fancy switch
+        //fFancyKontrole switch
         prekidac = findViewById(R.id.switchFancy);
         prekidac.setChecked(true);
+
     }//kraj OnCreate
 
     /**
