@@ -5,7 +5,7 @@
     android:id="@+id/textTemperatura"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fBasicKontrole">
+    tools:context=".FragmentBasicKontrole">
 
     <ImageView
         android:id="@+id/slikaRobota"

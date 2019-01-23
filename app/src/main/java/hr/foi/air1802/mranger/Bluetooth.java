@@ -21,7 +21,9 @@ import hr.foi.air1802.sharedmodule.Controls;
  */
 public class Bluetooth {
 
-    public Bluetooth(){ }
+    public Bluetooth(){
+        /*Radi smanjivanja Smell Code na Sonar Qube*/
+    }
 
     Controls control = new Controls();
 

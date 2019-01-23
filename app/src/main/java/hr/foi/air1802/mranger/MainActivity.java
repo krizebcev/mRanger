@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     Bluetooth bluetooth = new Bluetooth();
 
-    //fFancyKontrole switch zastavica
+    //FragmentFancyKontrole switch zastavica
     private Switch prekidac;
 
     /**
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        //fFancyKontrole switch
+        //FragmentFancyKontrole switch
         prekidac = findViewById(R.id.switchFancy);
         prekidac.setChecked(true);
 

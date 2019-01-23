@@ -15,7 +15,7 @@ import hr.foi.air1802.sharedmodule.Controls;
 import hr.foi.air1802.sharedmodule.IControls;
 
 
-public class fFancyKontrole extends Fragment {
+public class FragmentFancyKontrole extends Fragment {
 
     IControls icontrols = new Controls();
 
