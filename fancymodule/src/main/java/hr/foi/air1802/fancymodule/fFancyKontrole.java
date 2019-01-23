@@ -1,9 +1,6 @@
-package hr.foi.air1802.mranger;
+package hr.foi.air1802.fancymodule;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,8 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import hr.foi.air1802.sharedmodule.Controls;
+import hr.foi.air1802.sharedmodule.IControls;
+
 
 public class fFancyKontrole extends Fragment {
+
+    IControls icontrols = new Controls();
 
     ImageButton gumbDisconnect;
     ImageButton gumbForward;
@@ -74,7 +76,7 @@ public class fFancyKontrole extends Fragment {
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Controls.disconnect(getActivity());
+                icontrols.disconnect(getActivity());
             }
         });
         /**
@@ -83,11 +85,11 @@ public class fFancyKontrole extends Fragment {
         gumbForward.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN ) {
-                    Controls.moveForward(event);
+                    icontrols.moveForward(event);
                     gumbForward.setImageResource(R.drawable.gore_stisnuto);
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP ) {
-                    Controls.moveForward(event);
+                    icontrols.moveForward(event);
                     gumbForward.setImageResource(R.drawable.gore);
                 }
                 return false;
@@ -100,11 +102,11 @@ public class fFancyKontrole extends Fragment {
         gumbLeft.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN ) {
-                    Controls.moveLeft(event);
+                    icontrols.moveLeft(event);
                     gumbLeft.setImageResource(R.drawable.lijevo_stisnuto);
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP ) {
-                    Controls.moveLeft(event);
+                    icontrols.moveLeft(event);
                     gumbLeft.setImageResource(R.drawable.lijevo);
                 }
                 return false;
@@ -117,11 +119,11 @@ public class fFancyKontrole extends Fragment {
         gumbRight.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN ) {
-                    Controls.moveRight(event);
+                    icontrols.moveRight(event);
                     gumbRight.setImageResource(R.drawable.desno_stisnuto);
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP ) {
-                    Controls.moveRight(event);
+                    icontrols.moveRight(event);
                     gumbRight.setImageResource(R.drawable.desno);
                 }
                 return false;
@@ -134,11 +136,11 @@ public class fFancyKontrole extends Fragment {
         gumbBackwards.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN ) {
-                    Controls.moveBackwards(event);
+                    icontrols.moveBackwards(event);
                     gumbBackwards.setImageResource(R.drawable.dolje_stisnuto);
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP ) {
-                    Controls.moveBackwards(event);
+                    icontrols.moveBackwards(event);
                     gumbBackwards.setImageResource(R.drawable.dolje);
                 }
                 return false;
@@ -151,7 +153,7 @@ public class fFancyKontrole extends Fragment {
         gumbSporo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.changeSpeed(120, 120);
+                icontrols.changeSpeed(120, 120);
 
                 gumbSporo.setImageResource(R.drawable.sporo_stisnuto);
                 gumbNormalno.setImageResource(R.drawable.normalno);
@@ -166,7 +168,7 @@ public class fFancyKontrole extends Fragment {
         gumbNormalno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.changeSpeed(180, 180);
+                icontrols.changeSpeed(180, 180);
 
                 gumbSporo.setImageResource(R.drawable.sporo);
                 gumbNormalno.setImageResource(R.drawable.normalno_stisnuto);
@@ -180,7 +182,7 @@ public class fFancyKontrole extends Fragment {
         gumbBrzo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.changeSpeed(240, 240);
+                icontrols.changeSpeed(240, 240);
 
                 gumbSporo.setImageResource(R.drawable.sporo);
                 gumbNormalno.setImageResource(R.drawable.normalno);
@@ -194,7 +196,7 @@ public class fFancyKontrole extends Fragment {
         gumbTemperatura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textViewTemperatura.setText(Controls.getTemperature());
+                textViewTemperatura.setText(icontrols.getTemperature());
             }
         });
 
@@ -204,7 +206,7 @@ public class fFancyKontrole extends Fragment {
         gumbPohraniTemperaturu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.insertTemperatueToDB(getContext());
+                icontrols.insertTemperatueToDB(getContext());
             }
         });
     }

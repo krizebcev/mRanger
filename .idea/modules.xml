@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fancymodule/fancymodule.iml" filepath="$PROJECT_DIR$/fancymodule/fancymodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/mRanger.iml" filepath="$PROJECT_DIR$/mRanger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sharedmodule/sharedmodule.iml" filepath="$PROJECT_DIR$/sharedmodule/sharedmodule.iml" />
     </modules>
   </component>
 </project>

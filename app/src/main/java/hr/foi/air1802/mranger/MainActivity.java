@@ -1,7 +1,6 @@
 package hr.foi.air1802.mranger;
 
 
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
  * Na zaslonu je omogućeno paljenje i gašenje Bluetooth-a te pronalazak uređaja na kojih se može povezat.
  */
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    Bluetooth bluetooth = new Bluetooth();
 
     //fFancyKontrole switch zastavica
     private Switch prekidac;
@@ -53,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Bluetooth.listaDiscoveredDevices = findViewById(R.id.listaDiscDevices);
         Bluetooth.listaDiscoveredDevices.setOnItemClickListener(MainActivity.this);
         Bluetooth.myBluetoothDevices = new ArrayList<>();
-        Bluetooth.createBluetoothAdapter();
+        bluetooth.createBluetoothAdapter();
 
         //Paljenje gašenje Bluetooth-a
         gumbBTOnOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bluetooth.enableDisableBluetooth(getApplicationContext());
+                bluetooth.enableDisableBluetooth(getApplicationContext());
             }
         });
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 Bluetooth.myBluetoothDevices.clear();
-                Bluetooth.discoverBluetoothDevices(MainActivity.this, getApplicationContext(),myBroadcastReceiver);
+                bluetooth.discoverBluetoothDevices(MainActivity.this, getApplicationContext(),myBroadcastReceiver);
             }
         });
 
@@ -115,6 +116,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Bluetooth.startConnection( position, getApplicationContext(), prekidac.isChecked());
+        bluetooth.startConnection( position, getApplicationContext(), prekidac.isChecked());
     }
 }

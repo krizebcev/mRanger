@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import hr.foi.air1802.sharedmodule.Controls;
+
 /**
  * Klasa koja služi za ostvarivanje i upravljanje Bluetooth konekcijom nad uređajem
  */

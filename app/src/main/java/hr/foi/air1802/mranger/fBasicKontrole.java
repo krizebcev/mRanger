@@ -1,8 +1,6 @@
 package hr.foi.air1802.mranger;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,8 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import hr.foi.air1802.sharedmodule.Controls;
+import hr.foi.air1802.sharedmodule.IControls;
 
-public class fBasicKontrole extends Fragment {
+
+public class fBasicKontrole extends Fragment{
+
+    IControls icontrols = new Controls();
+
     Button gumbDisconnect;
     Button gumbForward;
     Button gumbLeft;
@@ -67,7 +71,7 @@ public class fBasicKontrole extends Fragment {
         gumbDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Controls.disconnect(getActivity());
+                icontrols.disconnect(getActivity());
             }
         });
 
@@ -77,7 +81,7 @@ public class fBasicKontrole extends Fragment {
         gumbForward.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return Controls.moveForward(event);
+                return icontrols.moveForward(event);
             }
 
 
@@ -89,7 +93,7 @@ public class fBasicKontrole extends Fragment {
         gumbLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return Controls.moveLeft(event);
+                return icontrols.moveLeft(event);
             }
         });
 
@@ -99,7 +103,7 @@ public class fBasicKontrole extends Fragment {
         gumbRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return Controls.moveRight(event);
+                return icontrols.moveRight(event);
             }
         });
 
@@ -109,7 +113,7 @@ public class fBasicKontrole extends Fragment {
         gumbBackwards.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return  Controls.moveBackwards(event);
+                return  icontrols.moveBackwards(event);
             }
         });
 
@@ -119,7 +123,7 @@ public class fBasicKontrole extends Fragment {
         gumbSporo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.changeSpeed(120, 120);
+                icontrols.changeSpeed(120, 120);
 
                 gumbSporo.setBackgroundColor(Color.parseColor("#4eae68"));
                 gumbNormalno.setBackgroundResource(android.R.drawable.btn_default);
@@ -133,7 +137,7 @@ public class fBasicKontrole extends Fragment {
         gumbNormalno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.changeSpeed(180, 180);
+                icontrols.changeSpeed(180, 180);
 
                 gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
                 gumbNormalno.setBackgroundColor(Color.parseColor("#fed63c"));
@@ -147,7 +151,7 @@ public class fBasicKontrole extends Fragment {
         gumbBrzo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.changeSpeed(240, 240);
+                icontrols.changeSpeed(240, 240);
 
                 gumbSporo.setBackgroundResource(android.R.drawable.btn_default);
                 gumbNormalno.setBackgroundResource(android.R.drawable.btn_default);
@@ -161,7 +165,7 @@ public class fBasicKontrole extends Fragment {
         gumbTemperatura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gumbTemperatura.setText(Controls.getTemperature());
+                gumbTemperatura.setText(icontrols.getTemperature());
             }
         });
 
@@ -171,7 +175,7 @@ public class fBasicKontrole extends Fragment {
         gumbPohraniTemperaturu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Controls.insertTemperatueToDB(getContext());
+                icontrols.insertTemperatueToDB(getContext());
             }
         });
     }

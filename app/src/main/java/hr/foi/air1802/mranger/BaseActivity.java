@@ -2,12 +2,16 @@ package hr.foi.air1802.mranger;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import hr.foi.air1802.fancymodule.fFancyKontrole;
+import hr.foi.air1802.sharedmodule.Controls;
+import hr.foi.air1802.sharedmodule.IControls;
+
 public class BaseActivity extends AppCompatActivity {
+
+    IControls icontrols = new Controls();
 
     private String mode;
     private Fragment mFragment;
@@ -18,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Controls.disconnect(this);
+        icontrols.disconnect(this);
     }
 
     @Override

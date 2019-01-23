@@ -1,4 +1,4 @@
-package hr.foi.air1802.mranger;
+package hr.foi.air1802.sharedmodule;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -23,15 +23,15 @@ import java.util.UUID;
 /**
  * Klasa koja služi za upravljanje kontrolama na robotu
  */
-public class Controls {
+public class Controls implements IControls {
 
-    private Controls(){}
+    public Controls(){}
 
-    protected static String address = null;
+    public static String address = null;
     public static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    protected static BluetoothAdapter myBluetoothAdapter = null;
-    protected static BluetoothSocket bluetoothSocket = null;
-    protected static boolean isBluetoothConnected = false;
+    public static BluetoothAdapter myBluetoothAdapter = null;
+    public static BluetoothSocket bluetoothSocket = null;
+    public static boolean isBluetoothConnected = false;
     private static float globTemp;
     private static boolean isTemperatureRead=false;
     private static float proslaTemp;
@@ -48,7 +48,7 @@ public class Controls {
      * @param lijeviMotor brzina lijevog motora
      * @param desniMotor brzina desnog motora
      */
-    private static void move(int lijeviMotor, int desniMotor) {
+    public void move(int lijeviMotor, int desniMotor) {
         cmd[0] = (byte) 0xff;
         cmd[1] = (byte) 0x55;
         cmd[2] = (byte) 8;
@@ -82,7 +82,7 @@ public class Controls {
      * @param event objekt u kojem se prosljeđuje događaj
      * @return
      */
-    public static boolean moveForward(MotionEvent event){
+    public boolean moveForward(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
             move(-lijeviMotor, desniMotor);
@@ -99,7 +99,7 @@ public class Controls {
      * @param event objekt u kojem se prosljeđuje događaj
      * @return
      */
-    public static boolean moveLeft(MotionEvent event){
+    public boolean moveLeft(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
             move(-lijeviMotor, -desniMotor);
@@ -116,7 +116,7 @@ public class Controls {
      * @param event objekt u kojem se prosljeđuje događaj
      * @return
      */
-    public static boolean moveRight(MotionEvent event){
+    public boolean moveRight(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
             move(lijeviMotor, desniMotor);
@@ -133,7 +133,7 @@ public class Controls {
      * @param event objekt u kojem se prosljeđuje događaj
      * @return
      */
-    public  static  boolean moveBackwards(MotionEvent event){
+    public boolean moveBackwards(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
             move(lijeviMotor, -desniMotor);
@@ -150,7 +150,7 @@ public class Controls {
      * @param desniMotor brzina desnog motora
      * @param lijeviMotor brzina lijevog motora
      */
-    public static void changeSpeed(int desniMotor, int lijeviMotor) {
+    public void changeSpeed(int desniMotor, int lijeviMotor) {
         Controls.desniMotor = desniMotor;
         Controls.lijeviMotor = lijeviMotor;
     }
@@ -159,7 +159,7 @@ public class Controls {
      * Metoda koja služi za dohvaćanje temperature s robota
      * @return
      */
-    public static String getTemperature() {
+    public String getTemperature() {
         String test = "";
 
         byte[] cmd = new byte[9];
@@ -219,7 +219,7 @@ public class Controls {
      * Metoda koja služi za prekid Bluetooth veze s robotom
      * @param activity aktivnost koja se završava ovom metodom
      */
-    public static void disconnect(Activity activity) {
+    public void disconnect(Activity activity) {
         if (bluetoothSocket != null) //ako smo spojeni
         {
             try {
@@ -236,7 +236,7 @@ public class Controls {
      * Metoda koja služi za slanje temperature u bazu podataka
      * @param context objekt u kojem se prosljeđuje trenutni kontekst
      */
-    public static void insertTemperatueToDB(Context context){
+    public void insertTemperatueToDB(Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="https://mranger.foi.hr/unos.php?temp="+globTemp;
 

@@ -14,25 +14,29 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import hr.foi.air1802.sharedmodule.Controls;
+
 /**
  * Klasa koja služi za uključivanje/isključivanje Bluetootha, otkirvanje uređaja i stvaranje konekcije
  */
 public class Bluetooth {
 
-    private Bluetooth(){ }
+    public Bluetooth(){ }
 
-    protected static BluetoothAdapter myBluetoothAdapter;
-    protected static ArrayList<BluetoothDevice> myBluetoothDevices;
-    protected static ListView listaDiscoveredDevices;
-    protected static DeviceListAdapter myDeviceListAdapter;
-    protected static String deviceAddress;
-    protected static String extraAddress = "device_address";
-    protected  static String extraFancy = "fancy_mode";
+    Controls control = new Controls();
+
+    public static BluetoothAdapter myBluetoothAdapter;
+    public static ArrayList<BluetoothDevice> myBluetoothDevices;
+    public static ListView listaDiscoveredDevices;
+    public static DeviceListAdapter myDeviceListAdapter;
+    public static String deviceAddress;
+    public static String extraAddress = "device_address";
+    public static String extraFancy = "fancy_mode";
 
     /**
      * Metoda koji služi za stvaranje novog Bluetooth adaptera
      */
-    public static void createBluetoothAdapter(){
+    public void createBluetoothAdapter(){
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
@@ -40,7 +44,7 @@ public class Bluetooth {
      * Metoda koja služi za uključivanje/isključivanje Bluetootha
      * @param context - parametar u kojem prosljeđujemo trenutni kontekst
      */
-    public static void enableDisableBluetooth(Context context){
+    public void enableDisableBluetooth(Context context){
 
         if (myBluetoothAdapter == null) { //ne podržava hr.foi.air1802.mranger.Bluetooth
             Toast.makeText(context,"Ovaj uređaj ne podržava Bluetooth konekciju.",Toast.LENGTH_LONG).show();
@@ -65,7 +69,7 @@ public class Bluetooth {
      * @param context - parametar u kojem se prosljeđuje kontekst
      * @param myBroadcastReceiver - parametar u kojem prosljeđujemo BroadcastReceiver
      */
-    public  static void discoverBluetoothDevices(Activity activity, Context context, BroadcastReceiver myBroadcastReceiver){
+    public void discoverBluetoothDevices(Activity activity, Context context, BroadcastReceiver myBroadcastReceiver){
         myBluetoothDevices.clear(); //ukoliko smo već otkrili neke, čistimo
         listaDiscoveredDevices.setAdapter(null);//ukoliko smo već otkrili neke, čistimo
         if (myBluetoothAdapter.isDiscovering()) {
@@ -98,7 +102,7 @@ public class Bluetooth {
      * @param position - parametar u kojem se prosljeđuje pozicija uređaja u listi otkirvenih uređaja
      * @param context - parametar u kojem se prosljeđuje kontekst
      */
-    public static void startConnection( int position, Context context, boolean prekidac){
+    public void startConnection( int position, Context context, boolean prekidac){
         myBluetoothAdapter.cancelDiscovery();
 
         deviceAddress = myBluetoothDevices.get(position).getAddress();
@@ -119,6 +123,6 @@ public class Bluetooth {
         connection.putExtra(extraAddress, deviceAddress);
         connection.putExtra(extraFancy,  mode);
         context.startActivity(connection);
-        Controls.changeSpeed(180, 180);
+        control.changeSpeed(180, 180);
     }
 }
