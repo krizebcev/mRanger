@@ -8,6 +8,9 @@ import hr.foi.air1802.fancymodule.FragmentFancyKontrole;
 import hr.foi.air1802.sharedmodule.Controls;
 import hr.foi.air1802.sharedmodule.IControls;
 
+/**
+ * Aktivnost unutar koje se pojedini dizajni kontrola(fragemnti) prikazuju i iz kojih je mouće upravljati robotom
+ */
 public class BaseActivity extends AppCompatActivity {
 
     IControls icontrols = new Controls();
@@ -21,6 +24,12 @@ public class BaseActivity extends AppCompatActivity {
         icontrols.disconnect(this);
     }
 
+    /**
+     * Početna metoda koja se ivodi prilikom pokretanja zaslona.
+     * Vrši se konekcija te se odabire koji će se fragment prikazati na zaslonu, ovisno
+     * o odabiru s MainActivity-a
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

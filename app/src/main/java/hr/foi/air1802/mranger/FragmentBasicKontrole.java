@@ -13,7 +13,9 @@ import android.widget.Button;
 import hr.foi.air1802.sharedmodule.Controls;
 import hr.foi.air1802.sharedmodule.IControls;
 
-
+/**
+ * Fragment za kontrolu robota putem jednostavnog izgleda, koristi se kod BaseActivity-a
+ */
 public class FragmentBasicKontrole extends Fragment{
 
     IControls icontrols = new Controls();
@@ -33,12 +35,23 @@ public class FragmentBasicKontrole extends Fragment{
 
     StringBuilder messages;
 
+    /**
+     * Metoda koja omogućuje prikaz fragmenta na određenom mjestu, u ovom slučaju kod BaseActivity-a zaslona
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_f_basic_kontrole, container, false);
     }
 
+    /**
+     * Metoda koja se poziva prilikom prikaza fragmenta, inicijalizacija elementata sa fragmenta te njihovih funkcionalnosti
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
