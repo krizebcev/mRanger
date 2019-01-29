@@ -5,7 +5,8 @@ import android.content.Context;
 import android.view.MotionEvent;
 
 /**
- * Interface pomoću kojeg je moguće pozivati metode iz klase Controls.
+ * Interface unutar kojeg se nalaze metode potrebne za upravljanje robotom
+ * koje su zatim implementirane u klasi Controls.
  * Omogućuje pozivanje metoda iz Fancy i Basic načina rada i iz modula fancymodule i app
  */
 public interface IControls {
